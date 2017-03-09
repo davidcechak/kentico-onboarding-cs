@@ -13,9 +13,16 @@ namespace ItemList.Api.Controllers
     {
         private static List<Item> Items;
 
-        public IHttpActionResult GetItem(int id)
+
+        private static Item FindItem(int id)
         {
             var Item = Items.Find((item) => item.Id == id);
+            return Item;
+        }
+
+        public IHttpActionResult GetItem(int id)
+        {
+            var Item = FindItem(id);
 
             if (Item == null)
             {
@@ -40,6 +47,19 @@ namespace ItemList.Api.Controllers
             }
             return NotFound();
         }
+
+
+        public IHttpActionResult DeleteItem(int id)
+        {
+            var item = FindItem(id);
+            if (item != null)
+            {
+                Items.Remove(item);
+                return Ok();
+            }
+            return NotFound();
+        }
+
 
 
     }
