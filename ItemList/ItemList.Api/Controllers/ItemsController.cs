@@ -61,6 +61,16 @@ namespace ItemList.Api.Controllers
         }
 
 
-
+        public IHttpActionResult UpdateItem(Item newItem)
+        {
+            var item = FindItem(newItem.Id);
+            if (item != null)
+            {
+                int index = Items.IndexOf(item);
+                Items.Insert(index, newItem);
+                return Ok();
+            }
+            return NotFound();
+        }
     }
 }
