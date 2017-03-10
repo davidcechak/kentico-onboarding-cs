@@ -8,8 +8,8 @@ namespace ItemList.Api.Models
 {
     public class Item
     {
-        [Required]  
-        public int Id { get; set; }
+        [Required]
+        public Guid Id { get; set; }
 
         [Required]
         [StringLength(100)]
