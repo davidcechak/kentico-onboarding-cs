@@ -44,5 +44,17 @@ namespace ItemList.Api.Controllers
 
             return Created(location, items[2]);
         }
+
+        
+        public IHttpActionResult Delete(Guid id)
+        {
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+
+        public IHttpActionResult Put(Item item)
+        {
+            return Ok();
+        }
     }
 }
