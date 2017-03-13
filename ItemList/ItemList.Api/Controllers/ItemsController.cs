@@ -11,16 +11,23 @@ namespace ItemList.Api.Controllers
 {
     public class ItemsController : ApiController
     {
+        public static List<Item> items = new List<Item>
+        {
+            new Item { Id = new Guid("7383243d-9230-4a6c-94ea-122e151208ca"), Value = "text1" },
+            new Item { Id = new Guid("83aa9154-2b5f-49b7-b7af-25cab7bf2159"), Value = "text2" },
+            new Item { Id = new Guid("331c43f5-11af-43a4-83d1-7d949ae5a8d7"), Value = "text3" },
+};
+
         public IEnumerable<Item> Get()
         {
-            yield return new Item { Id = new Guid("7383243d-9230-4a6c-94ea-122e151208ca"), Value = "text1" };
-            yield return new Item { Id = new Guid("83aa9154-2b5f-49b7-b7af-25cab7bf2159"), Value = "text2" };
+            yield return items[0];
+            yield return items[1];
         }
 
 
         public IHttpActionResult Get(Guid id)
         {
-            return Ok(new Item { Id = new Guid("331c43f5-11af-43a4-83d1-7d949ae5a8d7"), Value = "text3" });
+            return Ok(items[2]);
         }
 
 
@@ -33,7 +40,9 @@ namespace ItemList.Api.Controllers
                 Id = "331c43f5-11af-43a4-83d1-7d949ae5a8d7"
             });
 
-            return Created(location, new Item { Id = new Guid("331c43f5-11af-43a4-83d1-7d949ae5a8d7"), Value = item.Value });
+            items[2].Value = item.Value;
+
+            return Created(location, items[2]);
         }
     }
 }
