@@ -11,6 +11,12 @@ namespace ItemList.Api.Tests
     [TestFixture]
     public class ItemsControllerTests
     {
+        private ItemsController _itemsController;
 
+        [SetUp]
+        public void SetUp()
+        {
+            _itemsController = new ItemsController();
+        }
     }
 }
