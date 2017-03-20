@@ -12,10 +12,11 @@ namespace ItemList.Api.Controllers
     public class ItemsController : ApiController
     {
 
-        public IEnumerable<Item> Get()
+        public IHttpActionResult Get()
         {
-            yield return new Item { Id = new Guid("7383243d-9230-4a6c-94ea-122e151208ca"), Value = "text1" };
-            yield return new Item { Id = new Guid("83aa9154-2b5f-49b7-b7af-25cab7bf2159"), Value = "text2" };
+            var item1 = new Item { Id = new Guid("7383243d-9230-4a6c-94ea-122e151208ca"), Value = "text1" };
+            var item2 = new Item { Id = new Guid("83aa9154-2b5f-49b7-b7af-25cab7bf2159"), Value = "text2" };
+            return Ok(new List<Item> { item1, item2 });
         }
 
 
