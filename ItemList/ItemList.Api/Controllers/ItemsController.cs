@@ -3,14 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Web.Http;
 using System.Web.UI.WebControls;
+using ItemList.Api.Helpers;
 using ItemList.Api.Models;
 
 namespace ItemList.Api.Controllers
 {
     public class ItemsController : ApiController
     {
+        private readonly IItemUrlHelper _itemUrlHelper;
+
+        public ItemsController()
+        {
+            _itemUrlHelper = new ItemUrlHelper(Url);
+        }
+
+        public ItemsController(IItemUrlHelper itemUrlHelper)
+        {
+            _itemUrlHelper = itemUrlHelper;
+        }
 
         public IHttpActionResult Get()
         {
@@ -29,13 +42,9 @@ namespace ItemList.Api.Controllers
 
         public IHttpActionResult Post(Item item)
         {
-            item = new Item { Id = new Guid("5081544A-5584-4449-B0CD-72B2BFF0AF30"), Value = "text4" };
+            item = new Item { Id = new Guid("5081544A-5584-4449-B0CD-72B2BFF0AF30"), Ueid = "Hello Susan", Value = "text4" };
 
-            var location = Url.Link(null, new
-            {
-                Controller = nameof(ItemsController).Replace("Controller", String.Empty),
-                Id = item.Id
-            });
+            var location = _itemUrlHelper.GetUrl(item.Id);
 
             return Created(location, item);
         }
@@ -49,7 +58,7 @@ namespace ItemList.Api.Controllers
 
         public IHttpActionResult Put(Item item)
         {
-            return Ok();
+            return StatusCode(HttpStatusCode.NoContent);
         }
     }
 }
