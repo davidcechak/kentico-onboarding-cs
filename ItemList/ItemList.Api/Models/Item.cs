@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace ItemList.Api.Models
 {
     public class Item
     {
-        [Required]
         public Guid Id { get; set; }
 
-        [Required]
-        [StringLength(100)]
+        public string Ueid { get; set; }
+
         public string Value { get; set; }
+
+        public override string ToString()
+        {
+            return $"{nameof(Id)}: {Id}, {nameof(Ueid)}: {Ueid}, {nameof(Value)}: {Value}";
+        }
+
+        
     }
 }
