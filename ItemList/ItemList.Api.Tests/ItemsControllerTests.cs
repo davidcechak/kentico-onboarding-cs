@@ -13,6 +13,7 @@ using ItemList.Api.Helpers;
 using ItemList.Contracts.DatabaseLayer;
 using NSubstitute;
 using ItemList.Contracts.Models;
+using ItemList.Contracts.ServiceLayer;
 
 namespace ItemList.Api.Tests
 {
@@ -21,6 +22,7 @@ namespace ItemList.Api.Tests
     {
         private ItemsController _itemsController;
         private IItemsRepository _repositoryMock;
+        private IGuidGenerator _guidGeneratorMock;
 
         [SetUp]
         public void SetUp()
@@ -29,8 +31,9 @@ namespace ItemList.Api.Tests
             itemUrlHelperMock.GetUrl(Arg.Any<Guid>()).Returns(info => info.Arg<Guid>().ToString());
 
             _repositoryMock = Substitute.For<IItemsRepository>();
+            _guidGeneratorMock = Substitute.For<IGuidGenerator>();
 
-            _itemsController = new ItemsController(itemUrlHelperMock, _repositoryMock)
+            _itemsController = new ItemsController(itemUrlHelperMock, _repositoryMock, _guidGeneratorMock)
             {
                 Request = new HttpRequestMessage(),
                 Configuration = new HttpConfiguration()
@@ -100,10 +103,13 @@ namespace ItemList.Api.Tests
         [Test]
         public async Task Post_ValidItem_ReturnsDummyItemAndUrl()
         {
-            const string expectedId = "5081544A-5584-4449-B0CD-72B2BFF0AF30";
+            Guid expectedId = new Guid("5081544A-5584-4449-B0CD-72B2BFF0AF30");
             const string ueid = "Hello Susan";
             const string value = "text4";
-            var expectedItem = new Item { Id = new Guid(expectedId), Ueid = ueid, Value = value };
+
+            _guidGeneratorMock.GenerateGuid().Returns(expectedId);
+
+            var expectedItem = new Item { Id = expectedId, Ueid = ueid, Value = value };
             var postedItem = new Item { Ueid = ueid, Value = value };
 
             var result = await _itemsController.Post(postedItem);
@@ -114,7 +120,7 @@ namespace ItemList.Api.Tests
             await _repositoryMock.Received().Create(postedItem);
 
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
-            Assert.That(response.Headers.Location.ToString(), Does.EndWith(expectedId).IgnoreCase);
+            Assert.That(response.Headers.Location.ToString(), Does.EndWith(expectedId.ToString()).IgnoreCase);
             Assert.That(actualItem, Is.EqualTo(expectedItem).UsingItemComparer());
         }
     }

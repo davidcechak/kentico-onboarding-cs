@@ -5,24 +5,28 @@ using System.Web.Http;
 using ItemList.Api.Helpers;
 using ItemList.Contracts.DatabaseLayer;
 using ItemList.Contracts.Models;
+using ItemList.Contracts.ServiceLayer;
 
 namespace ItemList.Api.Controllers
 {
     public class ItemsController : ApiController
     {
         private readonly IItemUrlHelper _itemUrlHelper;
-        private IItemsRepository _repository;
+        private readonly IItemsRepository _repository;
+        private readonly IGuidGenerator _guidGenerator;
 
-        public ItemsController(IItemsRepository repository)
+        public ItemsController(IItemsRepository repository, IGuidGenerator guidGenerator)
         {
             _itemUrlHelper = new ItemUrlHelper(Url);
             _repository = repository;
+            _guidGenerator = guidGenerator;
         }
 
-        public ItemsController(IItemUrlHelper itemUrlHelper, IItemsRepository repository)
+        public ItemsController(IItemUrlHelper itemUrlHelper, IItemsRepository repository, IGuidGenerator guidGenerator)
         {
             _itemUrlHelper = itemUrlHelper;
             _repository = repository;
+            _guidGenerator = guidGenerator;
         }
 
         public async Task<IHttpActionResult> Get()
@@ -41,7 +45,7 @@ namespace ItemList.Api.Controllers
 
         public async Task<IHttpActionResult> Post(Item item)
         {
-            item.Id = new Guid("5081544A-5584-4449-B0CD-72B2BFF0AF30");
+            item.Id = _guidGenerator.GenerateGuid();
             await _repository.Create(item);
 
             var location = _itemUrlHelper.GetUrl(item.Id);
