@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.Contracts", "ItemL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.IoCBootstraper", "ItemList.IoCBootstraper\ItemList.IoCBootstraper.csproj", "{557B0A30-4DEA-4B82-9EF8-8DD1F19B6AE6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.ServiceLayer", "ItemList.ServiceLayer\ItemList.ServiceLayer.csproj", "{139629F4-0D1B-4C0F-980D-720F98133EEC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{557B0A30-4DEA-4B82-9EF8-8DD1F19B6AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{557B0A30-4DEA-4B82-9EF8-8DD1F19B6AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{557B0A30-4DEA-4B82-9EF8-8DD1F19B6AE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{139629F4-0D1B-4C0F-980D-720F98133EEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{139629F4-0D1B-4C0F-980D-720F98133EEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{139629F4-0D1B-4C0F-980D-720F98133EEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{139629F4-0D1B-4C0F-980D-720F98133EEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

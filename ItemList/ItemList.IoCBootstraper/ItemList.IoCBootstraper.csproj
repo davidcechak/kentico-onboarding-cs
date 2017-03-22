@@ -52,6 +52,10 @@
       <Project>{85498898-533e-4446-b3d2-5e51e05635c0}</Project>
       <Name>ItemList.DatabaseLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ItemList.ServiceLayer\ItemList.ServiceLayer.csproj">
+      <Project>{139629f4-0d1b-4c0f-980d-720f98133eec}</Project>
+      <Name>ItemList.ServiceLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -7,6 +7,7 @@ namespace ItemList.IoCBootstraper
         public static void RegisterTypes(IIoCContainer container)
         {
             DatabaseLayer.Bootstraper.RegisterTypes(container);
+            ServiceLayer.Bootstraper.RegisterTypes(container);
         }
     }
 }
