@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using ItemList.Api.Controllers;
 using NUnit.Framework;
 using System.Web.Http;
@@ -8,6 +10,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using ItemList.Api.Helpers;
+using ItemList.Contracts.DatabaseLayer;
 using NSubstitute;
 using ItemList.Contracts.Models;
 
@@ -17,6 +20,7 @@ namespace ItemList.Api.Tests
     public class ItemsControllerTests
     {
         private ItemsController _itemsController;
+        private IItemsRepository _repositoryMock;
 
         [SetUp]
         public void SetUp()
@@ -24,7 +28,9 @@ namespace ItemList.Api.Tests
             var itemUrlHelperMock = Substitute.For<IItemUrlHelper>();
             itemUrlHelperMock.GetUrl(Arg.Any<Guid>()).Returns(info => info.Arg<Guid>().ToString());
 
-            _itemsController = new ItemsController(itemUrlHelperMock)
+            _repositoryMock = Substitute.For<IItemsRepository>();
+
+            _itemsController = new ItemsController(itemUrlHelperMock, _repositoryMock)
             {
                 Request = new HttpRequestMessage(),
                 Configuration = new HttpConfiguration()
@@ -34,10 +40,11 @@ namespace ItemList.Api.Tests
         [Test]
         public async Task Get_WithoutParameters_ReturnsAllItems()
         {
-            var expectedItems = new List<Item> {
+            IEnumerable<Item> expectedItems = new List<Item> {
                 new Item { Id = new Guid("7383243d-9230-4a6c-94ea-122e151208ca"), Value = "text1" },
                 new Item { Id = new Guid("83aa9154-2b5f-49b7-b7af-25cab7bf2159"), Value = "text2" }
             };
+            _repositoryMock.GetAll().Returns(Task.FromResult(expectedItems));
 
             var result = await _itemsController.Get();
             var response = await result.ExecuteAsync(CancellationToken.None);
@@ -54,6 +61,8 @@ namespace ItemList.Api.Tests
             var id = new Guid("331c43f5-11af-43a4-83d1-7d949ae5a8d7");
             var expectedItem = new Item { Id = id, Value = "text3" };
 
+            _repositoryMock.Get(Arg.Is(id)).Returns(Task.FromResult(expectedItem));
+
             var result = await _itemsController.Get(id);
             var response = await result.ExecuteAsync(CancellationToken.None);
             Item actualItem;
@@ -67,21 +76,24 @@ namespace ItemList.Api.Tests
         public async Task Delete_ExistingId_ReturnsNoContent()
         {
             var id = new Guid("331c43f5-11af-43a4-83d1-7d949ae5a8d7");
-
+            
             var result = await _itemsController.Delete(id);
             var response = await result.ExecuteAsync(CancellationToken.None);
 
+            // why await here?
+            await _repositoryMock.Received().Delete(id);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NoContent));
         }
 
         [Test]
         public async Task Put_ExitingId_ReturnsNoContent()
         {
-            var puttedItem = new Item { Id = new Guid("331c43f5-11af-43a4-83d1-7d949ae5a8d7"), Value = "text3" };
+            var itemToPut = new Item { Id = new Guid("331c43f5-11af-43a4-83d1-7d949ae5a8d7"), Value = "text3" };
 
-            var result = await _itemsController.Put(puttedItem);
+            var result = await _itemsController.Put(itemToPut);
             var response = await result.ExecuteAsync(CancellationToken.None);
 
+            await _repositoryMock.Received().Update(itemToPut);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NoContent));
         }
 
@@ -98,6 +110,8 @@ namespace ItemList.Api.Tests
             var response = await result.ExecuteAsync(CancellationToken.None);
             Item actualItem;
             response.TryGetContentValue(out actualItem);
+
+            await _repositoryMock.Received().Create(postedItem);
 
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
             Assert.That(response.Headers.Location.ToString(), Does.EndWith(expectedId).IgnoreCase);
