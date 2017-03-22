@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
@@ -77,11 +78,9 @@ namespace ItemList.Api.Tests
         public async Task Delete_ExistingId_ReturnsNoContent()
         {
             var id = new Guid("331c43f5-11af-43a4-83d1-7d949ae5a8d7");
-            
+
             var result = await _itemsController.Delete(id);
             var response = await result.ExecuteAsync(CancellationToken.None);
-
-            // why await here?
             await _repositoryMock.Received().Delete(id);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NoContent));
         }
@@ -91,10 +90,14 @@ namespace ItemList.Api.Tests
         {
             var itemToPut = new Item { Id = new Guid("331c43f5-11af-43a4-83d1-7d949ae5a8d7"), Value = "text3" };
 
+            var itemSentToRepository = new Item();
+
+            _repositoryMock.Update(Arg.Do<Item>(item => { itemSentToRepository = item; })).Returns(Task.CompletedTask);
+
             var result = await _itemsController.Put(itemToPut);
             var response = await result.ExecuteAsync(CancellationToken.None);
 
-            await _repositoryMock.Received().Update(itemToPut);
+            Assert.That(itemSentToRepository, Is.EqualTo(itemToPut).UsingItemComparer());
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NoContent));
         }
 
