@@ -18,22 +18,22 @@ namespace ItemList.DatabaseLayer.Repositories
             return await Task.FromResult(items);
         }
 
-        public async Task<Item> Get()
+        public async Task<Item> Get(Guid id)
         {
             return await Task.FromResult(new Item { Id = new Guid("331c43f5-11af-43a4-83d1-7d949ae5a8d7"), Value = "text3" });
         }
 
-        public async Task Create()
+        public async Task Create(Item item)
         {
             await Task.CompletedTask;
         }
 
-        public async Task Update()
+        public async Task Update(Item item)
         {
             await Task.CompletedTask;
         }
 
-        public async Task Delete()
+        public async Task Delete(Guid id)
         {
             await Task.CompletedTask;
         }
