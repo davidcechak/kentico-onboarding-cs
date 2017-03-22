@@ -76,6 +76,10 @@
       <Project>{A035EF9D-D949-46DD-9EBC-DB19D5B0E0D1}</Project>
       <Name>ItemList.Api</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ItemList.Contracts\ItemList.Contracts.csproj">
+      <Project>{8bd82302-c4b5-4cce-ac2d-7845c743aadc}</Project>
+      <Name>ItemList.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

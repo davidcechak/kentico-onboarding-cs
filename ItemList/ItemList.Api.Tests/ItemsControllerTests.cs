@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using ItemList.Api.Controllers;
-using ItemList.Api.Models;
 using NUnit.Framework;
 using System.Web.Http;
 using System.Threading;
@@ -10,6 +9,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using ItemList.Api.Helpers;
 using NSubstitute;
+using ItemList.Contracts.Models;
 
 namespace ItemList.Api.Tests
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using ItemList.Api.Models;
+using ItemList.Contracts.Models;
 using NUnit.Framework.Constraints;
 
 namespace ItemList.Api.Tests

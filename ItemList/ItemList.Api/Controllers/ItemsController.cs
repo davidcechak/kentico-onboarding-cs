@@ -4,7 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using ItemList.Api.Helpers;
-using ItemList.Api.Models;
+using ItemList.Contracts.Models;
 
 namespace ItemList.Api.Controllers
 {

@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace ItemList.Api.Models
+namespace ItemList.Contracts.Models
 {
     public class Item
     {
