@@ -6,7 +6,7 @@ using ItemList.Contracts.Models;
 
 namespace ItemList.DatabaseLayer.Repositories
 {
-    internal class ItemsRepository : IItemsRepository
+    public class ItemsRepository : IItemsRepository
     {
         public async Task<IEnumerable<Item>> GetAll()
         {

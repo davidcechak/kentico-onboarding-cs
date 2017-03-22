@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
+using ItemList.Api.DependecyInjection;
+using ItemList.IoCBootstraper;
+using Microsoft.Practices.Unity;
 
 namespace ItemList.Api
 {
@@ -10,6 +10,11 @@ namespace ItemList.Api
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            var container = new UnityContainer();
+            config.DependencyResolver = new UnityResolver(container);
+
+            var unityAdapter = new UnityAdapter(container);
+            Bootstraper.RegisterTypes(unityAdapter);
 
             // Web API routes
             config.MapHttpAttributeRoutes();
