@@ -1,4 +1,6 @@
-﻿using System.Web.Http;
+﻿using System.Net.Http;
+using System.Web;
+using System.Web.Http;
 using ItemList.Api.DependecyInjection;
 using ItemList.IoCBootstraper;
 using Microsoft.Practices.Unity;
@@ -11,10 +13,10 @@ namespace ItemList.Api
         {
             // Web API configuration and services
             var container = new UnityContainer();
-            config.DependencyResolver = new UnityResolver(container);
 
             var unityAdapter = new UnityAdapter(container);
             Bootstraper.RegisterTypes(unityAdapter);
+            config.DependencyResolver = new UnityResolver(container);
 
             // Web API routes
             config.MapHttpAttributeRoutes();
@@ -23,7 +25,7 @@ namespace ItemList.Api
                 name: "DefaultApi",
                 routeTemplate: "api/v1/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
-            );
+            );  
         }
     }
 }

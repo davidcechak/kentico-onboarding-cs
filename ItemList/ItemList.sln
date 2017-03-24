@@ -3,17 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.Api", "ItemList.Api\ItemList.Api.csproj", "{A035EF9D-D949-46DD-9EBC-DB19D5B0E0D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.Api", "Source\ItemList.Api\ItemList.Api.csproj", "{A035EF9D-D949-46DD-9EBC-DB19D5B0E0D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.Api.Tests", "ItemList.Api.Tests\ItemList.Api.Tests.csproj", "{B653C822-B2D2-42C4-8BF3-4FE2AF2DDF21}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.Api.Tests", "Tests\ItemList.Api.Tests\ItemList.Api.Tests.csproj", "{B653C822-B2D2-42C4-8BF3-4FE2AF2DDF21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.DatabaseLayer", "ItemList.DatabaseLayer\ItemList.DatabaseLayer.csproj", "{85498898-533E-4446-B3D2-5E51E05635C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.DatabaseLayer", "Source\ItemList.DatabaseLayer\ItemList.DatabaseLayer.csproj", "{85498898-533E-4446-B3D2-5E51E05635C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.Contracts", "ItemList.Contracts\ItemList.Contracts.csproj", "{8BD82302-C4B5-4CCE-AC2D-7845C743AADC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.Contracts", "Source\ItemList.Contracts\ItemList.Contracts.csproj", "{8BD82302-C4B5-4CCE-AC2D-7845C743AADC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.IoCBootstraper", "ItemList.IoCBootstraper\ItemList.IoCBootstraper.csproj", "{557B0A30-4DEA-4B82-9EF8-8DD1F19B6AE6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.IoCBootstraper", "Source\ItemList.IoCBootstraper\ItemList.IoCBootstraper.csproj", "{557B0A30-4DEA-4B82-9EF8-8DD1F19B6AE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.ServiceLayer", "ItemList.ServiceLayer\ItemList.ServiceLayer.csproj", "{139629F4-0D1B-4C0F-980D-720F98133EEC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.ServiceLayer", "Source\ItemList.ServiceLayer\ItemList.ServiceLayer.csproj", "{139629F4-0D1B-4C0F-980D-720F98133EEC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C1F1237A-E627-4586-93E2-156DA1A5249E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{B3BB08C7-CF19-4116-9FFA-61DE74575C87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,5 +52,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A035EF9D-D949-46DD-9EBC-DB19D5B0E0D1} = {B3BB08C7-CF19-4116-9FFA-61DE74575C87}
+		{B653C822-B2D2-42C4-8BF3-4FE2AF2DDF21} = {C1F1237A-E627-4586-93E2-156DA1A5249E}
+		{85498898-533E-4446-B3D2-5E51E05635C0} = {B3BB08C7-CF19-4116-9FFA-61DE74575C87}
+		{8BD82302-C4B5-4CCE-AC2D-7845C743AADC} = {B3BB08C7-CF19-4116-9FFA-61DE74575C87}
+		{557B0A30-4DEA-4B82-9EF8-8DD1F19B6AE6} = {B3BB08C7-CF19-4116-9FFA-61DE74575C87}
+		{139629F4-0D1B-4C0F-980D-720F98133EEC} = {B3BB08C7-CF19-4116-9FFA-61DE74575C87}
 	EndGlobalSection
 EndGlobal
