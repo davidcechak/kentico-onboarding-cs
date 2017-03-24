@@ -48,9 +48,6 @@ namespace ItemList.Api
             return new UnityResolver(child);
         }
 
-        public void Dispose()
-        {
-            Container.Dispose();
-        }
+        public void Dispose() => Container.Dispose();
     }
 }
