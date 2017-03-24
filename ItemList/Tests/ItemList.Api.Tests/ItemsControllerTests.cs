@@ -62,7 +62,6 @@ namespace ItemList.Api.Tests
         {
             var id = new Guid("331c43f5-11af-43a4-83d1-7d949ae5a8d7");
             var expectedItem = new Item { Id = id, Value = "text3" };
-
             _repositoryMock.Get(Arg.Is(id)).Returns(Task.FromResult(expectedItem));
 
             var result = await _itemsController.Get(id);
@@ -82,6 +81,7 @@ namespace ItemList.Api.Tests
             var result = await _itemsController.Delete(id);
             var response = await result.ExecuteAsync(CancellationToken.None);
             await _repositoryMock.Received().Delete(id);
+
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NoContent));
         }
 
@@ -89,9 +89,7 @@ namespace ItemList.Api.Tests
         public async Task Put_ExitingId_ReturnsNoContent()
         {
             var itemToPut = new Item { Id = new Guid("331c43f5-11af-43a4-83d1-7d949ae5a8d7"), Value = "text3" };
-
             var itemSentToRepository = new Item();
-
             _repositoryMock.Update(Arg.Do<Item>(item => { itemSentToRepository = item; })).Returns(Task.CompletedTask);
 
             var result = await _itemsController.Put(itemToPut);
@@ -107,9 +105,7 @@ namespace ItemList.Api.Tests
             Guid expectedId = new Guid("5081544A-5584-4449-B0CD-72B2BFF0AF30");
             const string ueid = "Hello Susan";
             const string value = "text4";
-
             _guidGeneratorMock.GenerateGuid().Returns(expectedId);
-
             var expectedItem = new Item { Id = expectedId, Ueid = ueid, Value = value };
             var postedItem = new Item { Ueid = ueid, Value = value };
 
@@ -117,7 +113,6 @@ namespace ItemList.Api.Tests
             var response = await result.ExecuteAsync(CancellationToken.None);
             Item actualItem;
             response.TryGetContentValue(out actualItem);
-
             await _repositoryMock.Received().Create(postedItem);
 
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
