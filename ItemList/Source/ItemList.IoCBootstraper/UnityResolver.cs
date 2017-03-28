@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Web.Http.Dependencies;
 using Microsoft.Practices.Unity;
 
-namespace ItemList.Api
+namespace ItemList.IoCBootstraper
 {
     public class UnityResolver : IDependencyResolver
     {

@@ -2,9 +2,9 @@
 
 namespace ItemList.IoCBootstraper
 {
-    public static class Bootstrap
+    internal static class Bootstrap
     {
-        public static void RegisterTypes(IIoCContainer container)
+        internal static void RegisterTypes(IIoCContainer container)
         {
             var databaseBootstrapper = new DatabaseLayer.Bootstraper();
             var serviceBootstrapper = new ServiceLayer.Bootstraper();

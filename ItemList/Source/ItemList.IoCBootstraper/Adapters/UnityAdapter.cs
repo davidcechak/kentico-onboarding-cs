@@ -1,9 +1,9 @@
-﻿using ItemList.Contracts.Api;
+using ItemList.Contracts.Api;
 using Microsoft.Practices.Unity;
 
-namespace ItemList.Api.DependecyInjection
+namespace ItemList.IoCBootstraper.Adapters
 {
-    public class UnityAdapter : IIoCContainer
+    internal class UnityAdapter : IIoCContainer
     {
         private readonly UnityContainer _container;
 

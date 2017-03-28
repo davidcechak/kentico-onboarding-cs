@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\IIoCContainer.cs" />
+    <Compile Include="Bootstrap\IBootstrapper.cs" />
     <Compile Include="DatabaseLayer\IItemsRepository.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
