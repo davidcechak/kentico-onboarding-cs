@@ -15,7 +15,7 @@ namespace ItemList.Api
             {
                 throw new ArgumentNullException(nameof(container));
             }
-            this.Container = container;
+            Container = container;
         }
 
         public object GetService(Type serviceType)
