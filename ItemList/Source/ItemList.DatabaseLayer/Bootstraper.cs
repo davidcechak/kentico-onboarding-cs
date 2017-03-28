@@ -1,12 +1,13 @@
 ﻿using ItemList.Contracts.Api;
+using ItemList.Contracts.Bootstrap;
 using ItemList.Contracts.DatabaseLayer;
 using ItemList.DatabaseLayer.Repositories;
 
 namespace ItemList.DatabaseLayer
 {
-    public static class Bootstraper
+    public class Bootstraper : IBootstrapper
     {
-        public static void RegisterTypes(IIoCContainer container)
+        public void RegisterTypes(IIoCContainer container)
         {
             container.RegisterRequestScope<IItemsRepository, ItemsRepository>();
         }
