@@ -22,15 +22,15 @@ namespace ItemList.Api.Controllers
             _identifierService = identifierService;
         }
 
-        public async Task<IHttpActionResult> Get() 
+        public async Task<IHttpActionResult> GetAsync() 
             => Ok(await _repository.GetAll());
 
 
-        public async Task<IHttpActionResult> Get(Guid id)
+        public async Task<IHttpActionResult> GetAsync(Guid id)
             => Ok(await _repository.Get(id));
 
 
-        public async Task<IHttpActionResult> Post(Item item)
+        public async Task<IHttpActionResult> PostAsync(Item item)
         {
             item.Id = _identifierService.GetIdentifier();
             await _repository.Create(item);
@@ -41,14 +41,14 @@ namespace ItemList.Api.Controllers
         }
 
 
-        public async Task<IHttpActionResult> Delete(Guid id)
+        public async Task<IHttpActionResult> DeleteAsync(Guid id)
         {
             await _repository.Delete(id);
             return StatusCode(HttpStatusCode.NoContent);
         }
 
 
-        public async Task<IHttpActionResult> Put(Item item)
+        public async Task<IHttpActionResult> PutAsync(Item item)
         {
             await _repository.Update(item);
             return StatusCode(HttpStatusCode.NoContent);

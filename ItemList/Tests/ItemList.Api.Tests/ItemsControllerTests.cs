@@ -47,9 +47,9 @@ namespace ItemList.Api.Tests
                 new Item { Id = new Guid("7383243d-9230-4a6c-94ea-122e151208ca"), Value = "text1" },
                 new Item { Id = new Guid("83aa9154-2b5f-49b7-b7af-25cab7bf2159"), Value = "text2" }
             };
-            _repositoryMock.GetAll().Returns(Task.FromResult(expectedItems));
+            _repositoryMock.GetAllAsync().Returns(Task.FromResult(expectedItems));
 
-            var result = await _itemsController.Get();
+            var result = await _itemsController.GetAsync();
             var response = await result.ExecuteAsync(CancellationToken.None);
             IEnumerable<Item> actualItems;
             response.TryGetContentValue(out actualItems);
@@ -63,9 +63,9 @@ namespace ItemList.Api.Tests
         {
             var id = new Guid("331c43f5-11af-43a4-83d1-7d949ae5a8d7");
             var expectedItem = new Item { Id = id, Value = "text3" };
-            _repositoryMock.Get(Arg.Is(id)).Returns(Task.FromResult(expectedItem));
+            _repositoryMock.GetAsync(Arg.Is(id)).Returns(Task.FromResult(expectedItem));
 
-            var result = await _itemsController.Get(id);
+            var result = await _itemsController.GetAsync(id);
             var response = await result.ExecuteAsync(CancellationToken.None);
             Item actualItem;
             response.TryGetContentValue(out actualItem);
@@ -79,9 +79,9 @@ namespace ItemList.Api.Tests
         {
             var id = new Guid("331c43f5-11af-43a4-83d1-7d949ae5a8d7");
 
-            var result = await _itemsController.Delete(id);
+            var result = await _itemsController.DeleteAsync(id);
             var response = await result.ExecuteAsync(CancellationToken.None);
-            await _repositoryMock.Received().Delete(id);
+            await _repositoryMock.Received().DeleteAsync(id);
 
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NoContent));
         }
@@ -91,9 +91,9 @@ namespace ItemList.Api.Tests
         {
             var itemToPut = new Item { Id = new Guid("331c43f5-11af-43a4-83d1-7d949ae5a8d7"), Value = "text3" };
             var itemSentToRepository = new Item();
-            _repositoryMock.Update(Arg.Do<Item>(item => { itemSentToRepository = item; })).Returns(Task.CompletedTask);
+            _repositoryMock.UpdateAsync(Arg.Do<Item>(item => { itemSentToRepository = item; })).Returns(Task.CompletedTask);
 
-            var result = await _itemsController.Put(itemToPut);
+            var result = await _itemsController.PutAsync(itemToPut);
             var response = await result.ExecuteAsync(CancellationToken.None);
 
             Assert.That(itemSentToRepository, Is.EqualTo(itemToPut).UsingItemComparer());
@@ -112,9 +112,9 @@ namespace ItemList.Api.Tests
             var postedItem = new Item { Ueid = expectedItem.Ueid, Value = expectedItem.Value };
             Item itemSentToRepository = null;
             _identifierServiceMock.GetIdentifier().Returns(expectedItem.Id);
-            _repositoryMock.Create(Arg.Do<Item>(item => { itemSentToRepository = item; })).Returns(Task.CompletedTask);
+            _repositoryMock.CreateAsync(Arg.Do<Item>(item => { itemSentToRepository = item; })).Returns(Task.CompletedTask);
 
-            var result = await _itemsController.Post(postedItem);
+            var result = await _itemsController.PostAsync(postedItem);
             var response = await result.ExecuteAsync(CancellationToken.None);
             Item actualItem;
             response.TryGetContentValue(out actualItem);

@@ -8,7 +8,7 @@ namespace ItemList.DatabaseLayer.Repositories
 {
     public class ItemsRepository : IItemsRepository
     {
-        public async Task<IEnumerable<Item>> GetAll()
+        public async Task<IEnumerable<Item>> GetAllAsync()
         {
             IEnumerable<Item> items = new List<Item>()
             {
@@ -18,22 +18,22 @@ namespace ItemList.DatabaseLayer.Repositories
             return await Task.FromResult(items);
         }
 
-        public async Task<Item> Get(Guid id)
+        public async Task<Item> GetAsync(Guid id)
         {
             return await Task.FromResult(new Item { Id = new Guid("331c43f5-11af-43a4-83d1-7d949ae5a8d7"), Value = "text3" });
         }
 
-        public async Task Create(Item item)
+        public async Task CreateAsync(Item item)
         {
             await Task.CompletedTask;
         }
 
-        public async Task Update(Item item)
+        public async Task UpdateAsync(Item item)
         {
             await Task.CompletedTask;
         }
 
-        public async Task Delete(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
             await Task.CompletedTask;
         }

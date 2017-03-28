@@ -7,14 +7,14 @@ namespace ItemList.Contracts.DatabaseLayer
 {
     public interface IItemsRepository
     {
-        Task<IEnumerable<Item>> GetAll();
+        Task<IEnumerable<Item>> GetAllAsync();
 
-        Task<Item> Get(Guid id);
+        Task<Item> GetAsync(Guid id);
 
-        Task Create(Item item);
+        Task CreateAsync(Item item);
 
-        Task Update(Item item);
+        Task UpdateAsync(Item item);
 
-        Task Delete(Guid id);
+        Task DeleteAsync(Guid id);
     }
 }

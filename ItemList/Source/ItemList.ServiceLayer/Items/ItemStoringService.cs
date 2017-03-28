@@ -20,7 +20,7 @@ namespace ItemList.ServiceLayer.Items
         public async Task<Item> StoreNewItemAsync(Item item)
         {
             Item newItem = CreateItemWithNewId(item);
-            await _itemRepository.Create(newItem);
+            await _itemRepository.CreateAsync(newItem);
 
             return newItem;
         }

@@ -43,7 +43,7 @@ namespace ItemList.Services.Tests
             };
             Item itemSentToRepository = null;
             _identifierServiceMock.GetIdentifier().Returns(expectedItem.Id);
-            _repositoryMock.Create(Arg.Do<Item>(item => { itemSentToRepository = item; })).Returns(Task.CompletedTask);
+            _repositoryMock.CreateAsync(Arg.Do<Item>(item => { itemSentToRepository = item; })).Returns(Task.CompletedTask);
 
 
             Item actualItem = await _itemStoringService.StoreNewItemAsync(postedItem);
