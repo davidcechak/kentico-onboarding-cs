@@ -7,8 +7,8 @@ namespace ItemList.IoCBootstraper
     {
         internal static void RegisterTypes(IIoCContainer container)
         {
-            var databaseBootstrapper = new DatabaseLayer.Bootstraper();
-            var serviceBootstrapper = new ServiceLayer.Bootstraper();
+            var databaseBootstrapper = new DatabaseLayer.Bootstrapper();
+            var serviceBootstrapper = new ServiceLayer.Bootstrapper();
             var apiBootstrapper = new Api.Services.Bootstrapper();
 
             apiBootstrapper.RegisterTypes(container);

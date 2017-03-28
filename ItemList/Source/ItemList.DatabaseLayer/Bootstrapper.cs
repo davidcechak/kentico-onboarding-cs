@@ -5,7 +5,7 @@ using ItemList.DatabaseLayer.Repositories;
 
 namespace ItemList.DatabaseLayer
 {
-    public class Bootstraper : IBootstrapper
+    public class Bootstrapper : IBootstrapper
     {
         public void RegisterTypes(IIoCContainer container)
         {

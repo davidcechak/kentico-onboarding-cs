@@ -5,7 +5,7 @@ using ItemList.ServiceLayer.Utils;
 
 namespace ItemList.ServiceLayer
 {
-    public class Bootstraper : IBootstrapper
+    public class Bootstrapper : IBootstrapper
     {
         public void RegisterTypes(IIoCContainer container)
         {
