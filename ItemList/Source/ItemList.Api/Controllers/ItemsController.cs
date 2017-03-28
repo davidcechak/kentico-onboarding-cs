@@ -13,13 +13,13 @@ namespace ItemList.Api.Controllers
     {
         private readonly IItemUrlHelper _itemUrlHelper;
         private readonly IItemsRepository _repository;
-        private readonly IGuidGenerator _guidGenerator;
+        private readonly IIdentifierService _identifierService;
 
-        public ItemsController(IItemUrlHelper itemUrlHelper, IItemsRepository repository, IGuidGenerator guidGenerator)
+        public ItemsController(IItemUrlHelper itemUrlHelper, IItemsRepository repository, IIdentifierService identifierService)
         {
             _itemUrlHelper = itemUrlHelper;
             _repository = repository;
-            _guidGenerator = guidGenerator;
+            _identifierService = identifierService;
         }
 
         public async Task<IHttpActionResult> Get()
@@ -38,7 +38,7 @@ namespace ItemList.Api.Controllers
 
         public async Task<IHttpActionResult> Post(Item item)
         {
-            item.Id = _guidGenerator.GenerateGuid();
+            item.Id = _identifierService.GetIdentifier();
             await _repository.Create(item);
 
             var location = _itemUrlHelper.GetUrl(item.Id);

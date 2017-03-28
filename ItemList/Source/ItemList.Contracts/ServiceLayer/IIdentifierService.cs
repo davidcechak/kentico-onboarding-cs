@@ -2,8 +2,8 @@
 
 namespace ItemList.Contracts.ServiceLayer
 {
-    public interface IGuidGenerator
+    public interface IIdentifierService
     {
-        Guid GenerateGuid();
+        Guid GetIdentifier();
     }
 }

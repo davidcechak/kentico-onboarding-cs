@@ -21,7 +21,7 @@ namespace ItemList.Api.Tests
     {
         private ItemsController _itemsController;
         private IItemsRepository _repositoryMock;
-        private IGuidGenerator _guidGeneratorMock;
+        private IIdentifierService _identifierServiceMock;
 
         [SetUp]
         public void SetUp()
@@ -30,9 +30,9 @@ namespace ItemList.Api.Tests
             itemUrlHelperMock.GetUrl(Arg.Any<Guid>()).Returns(info => info.Arg<Guid>().ToString());
 
             _repositoryMock = Substitute.For<IItemsRepository>();
-            _guidGeneratorMock = Substitute.For<IGuidGenerator>();
+            _identifierServiceMock = Substitute.For<IIdentifierService>();
 
-            _itemsController = new ItemsController(itemUrlHelperMock, _repositoryMock, _guidGeneratorMock)
+            _itemsController = new ItemsController(itemUrlHelperMock, _repositoryMock, _identifierServiceMock)
             {
                 Request = new HttpRequestMessage(),
                 Configuration = new HttpConfiguration()
@@ -105,7 +105,7 @@ namespace ItemList.Api.Tests
             Guid expectedId = new Guid("5081544A-5584-4449-B0CD-72B2BFF0AF30");
             const string ueid = "Hello Susan";
             const string value = "text4";
-            _guidGeneratorMock.GenerateGuid().Returns(expectedId);
+            _identifierServiceMock.GetIdentifier().Returns(expectedId);
             var expectedItem = new Item { Id = expectedId, Ueid = ueid, Value = value };
             var postedItem = new Item { Ueid = ueid, Value = value };
 
