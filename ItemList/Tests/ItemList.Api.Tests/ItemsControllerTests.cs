@@ -103,22 +103,26 @@ namespace ItemList.Api.Tests
         [Test]
         public async Task Post_ValidItem_ReturnsDummyItemAndUrl()
         {
-            Guid expectedId = new Guid("5081544A-5584-4449-B0CD-72B2BFF0AF30");
-            const string ueid = "Hello Susan";
-            const string value = "text4";
-            _identifierServiceMock.GetIdentifier().Returns(expectedId);
-            var expectedItem = new Item { Id = expectedId, Ueid = ueid, Value = value };
-            var postedItem = new Item { Ueid = ueid, Value = value };
+            var expectedItem = new Item
+            {
+                Id = new Guid("5081544A-5584-4449-B0CD-72B2BFF0AF30"),
+                Ueid = "Hello Susan",
+                Value = "text4"
+            };
+            var postedItem = new Item { Ueid = expectedItem.Ueid, Value = expectedItem.Value };
+            Item itemSentToRepository = null;
+            _identifierServiceMock.GetIdentifier().Returns(expectedItem.Id);
+            _repositoryMock.Create(Arg.Do<Item>(item => { itemSentToRepository = item; })).Returns(Task.CompletedTask);
 
             var result = await _itemsController.Post(postedItem);
             var response = await result.ExecuteAsync(CancellationToken.None);
             Item actualItem;
             response.TryGetContentValue(out actualItem);
-            await _repositoryMock.Received().Create(postedItem);
-
+            
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
-            Assert.That(response.Headers.Location.ToString(), Does.EndWith(expectedId.ToString()).IgnoreCase);
+            Assert.That(response.Headers.Location.ToString(), Does.EndWith(expectedItem.Id.ToString()).IgnoreCase);
             Assert.That(actualItem, Is.EqualTo(expectedItem).UsingItemComparer());
+            Assert.That(itemSentToRepository, Is.EqualTo(expectedItem).UsingItemComparer());
         }
     }
 }
