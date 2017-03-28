@@ -14,7 +14,5 @@ namespace ItemList.Contracts.Models
         {
             return $"{nameof(Id)}: {Id}, {nameof(Ueid)}: {Ueid}, {nameof(Value)}: {Value}";
         }
-
-        
     }
 }
