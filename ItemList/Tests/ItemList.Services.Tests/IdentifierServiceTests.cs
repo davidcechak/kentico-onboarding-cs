@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ItemList.ServiceLayer.Utils;
+using ItemList.ServiceLayer.Wrappers;
 using NUnit.Framework;
 
 namespace ItemList.Services.Tests

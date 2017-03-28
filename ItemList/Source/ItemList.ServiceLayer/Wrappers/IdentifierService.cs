@@ -1,7 +1,7 @@
 ﻿using System;
 using ItemList.Contracts.ServiceLayer;
 
-namespace ItemList.ServiceLayer.Utils
+namespace ItemList.ServiceLayer.Wrappers
 {
     internal class IdentifierService : IIdentifierService
     {

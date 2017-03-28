@@ -23,17 +23,17 @@ namespace ItemList.Api.Controllers
         }
 
         public async Task<IHttpActionResult> GetAsync() 
-            => Ok(await _repository.GetAll());
+            => Ok(await _repository.GetAllAsync());
 
 
         public async Task<IHttpActionResult> GetAsync(Guid id)
-            => Ok(await _repository.Get(id));
+            => Ok(await _repository.GetAsync(id));
 
 
         public async Task<IHttpActionResult> PostAsync(Item item)
         {
             item.Id = _identifierService.GetIdentifier();
-            await _repository.Create(item);
+            await _repository.CreateAsync(item);
 
             var location = _itemUrlHelper.GetUrl(item.Id);
 
@@ -43,14 +43,14 @@ namespace ItemList.Api.Controllers
 
         public async Task<IHttpActionResult> DeleteAsync(Guid id)
         {
-            await _repository.Delete(id);
+            await _repository.DeleteAsync(id);
             return StatusCode(HttpStatusCode.NoContent);
         }
 
 
         public async Task<IHttpActionResult> PutAsync(Item item)
         {
-            await _repository.Update(item);
+            await _repository.UpdateAsync(item);
             return StatusCode(HttpStatusCode.NoContent);
         }
     }

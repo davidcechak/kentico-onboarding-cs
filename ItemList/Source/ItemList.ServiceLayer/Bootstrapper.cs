@@ -1,7 +1,7 @@
 ﻿using ItemList.Contracts.Api;
 using ItemList.Contracts.Bootstrap;
 using ItemList.Contracts.ServiceLayer;
-using ItemList.ServiceLayer.Utils;
+using ItemList.ServiceLayer.Wrappers;
 
 namespace ItemList.ServiceLayer
 {
