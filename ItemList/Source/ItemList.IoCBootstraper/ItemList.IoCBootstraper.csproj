@@ -75,6 +75,10 @@
     <Compile Include="UnityResolver.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ItemList.Api.Services\ItemList.Api.Services.csproj">
+      <Project>{3ff1c556-8249-4563-a863-071cc58406f0}</Project>
+      <Name>ItemList.Api.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ItemList.Contracts\ItemList.Contracts.csproj">
       <Project>{8BD82302-C4B5-4CCE-AC2D-7845C743AADC}</Project>
       <Name>ItemList.Contracts</Name>

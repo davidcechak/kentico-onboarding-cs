@@ -2,7 +2,7 @@
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
-using ItemList.Api.Helpers;
+using ItemList.Contracts.Api;
 using ItemList.Contracts.DatabaseLayer;
 using ItemList.Contracts.Models;
 using ItemList.Contracts.ServiceLayer;
@@ -14,13 +14,6 @@ namespace ItemList.Api.Controllers
         private readonly IItemUrlHelper _itemUrlHelper;
         private readonly IItemsRepository _repository;
         private readonly IGuidGenerator _guidGenerator;
-
-        public ItemsController(IItemsRepository repository, IGuidGenerator guidGenerator)
-        {
-            _itemUrlHelper = new ItemUrlHelper(Url);
-            _repository = repository;
-            _guidGenerator = guidGenerator;
-        }
 
         public ItemsController(IItemUrlHelper itemUrlHelper, IItemsRepository repository, IGuidGenerator guidGenerator)
         {

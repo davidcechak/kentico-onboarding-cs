@@ -1,4 +1,5 @@
-﻿using ItemList.Contracts.Api;
+﻿using System.Web.Http.Controllers;
+using ItemList.Contracts.Api;
 
 namespace ItemList.IoCBootstraper
 {
@@ -8,7 +9,9 @@ namespace ItemList.IoCBootstraper
         {
             var databaseBootstrapper = new DatabaseLayer.Bootstraper();
             var serviceBootstrapper = new ServiceLayer.Bootstraper();
+            var apiBootstrapper = new Api.Services.Bootstrapper();
 
+            apiBootstrapper.RegisterTypes(container);
             databaseBootstrapper.RegisterTypes(container);
             serviceBootstrapper.RegisterTypes(container);
         }

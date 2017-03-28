@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Web.Http.Routing;
+using ItemList.Contracts.Api;
 
-namespace ItemList.Api.Helpers
+namespace ItemList.Api.Services.Helpers
 {
     internal class ItemUrlHelper : IItemUrlHelper
     {

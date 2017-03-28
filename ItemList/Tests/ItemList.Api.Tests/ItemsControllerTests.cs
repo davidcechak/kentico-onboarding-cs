@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using ItemList.Api.Controllers;
-using ItemList.Api.Helpers;
+using ItemList.Contracts.Api;
 using ItemList.Contracts.DatabaseLayer;
 using ItemList.Contracts.Models;
 using ItemList.Contracts.ServiceLayer;

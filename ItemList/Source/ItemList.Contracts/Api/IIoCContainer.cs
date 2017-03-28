@@ -1,7 +1,12 @@
-﻿namespace ItemList.Contracts.Api
+﻿using System;
+
+namespace ItemList.Contracts.Api
 {
     public interface IIoCContainer
     {
-        void RegisterRequestScope<TInterface, TImplementation>() where TImplementation : TInterface, new();
+        void RegisterRequestScoped<TType, TImplementation>() 
+            where TImplementation : TType;
+
+        void RegisterRequestScoped<TType>(Func<TType> implementationFactory);
     }
 }

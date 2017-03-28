@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ItemList.Api.Helpers
+namespace ItemList.Contracts.Api
 {
     public interface IItemUrlHelper
     {

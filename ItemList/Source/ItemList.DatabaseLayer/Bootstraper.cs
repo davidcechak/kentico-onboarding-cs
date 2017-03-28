@@ -9,7 +9,7 @@ namespace ItemList.DatabaseLayer
     {
         public void RegisterTypes(IIoCContainer container)
         {
-            container.RegisterRequestScope<IItemsRepository, ItemsRepository>();
+            container.RegisterRequestScoped<IItemsRepository, ItemsRepository>();
         }
     }
 }

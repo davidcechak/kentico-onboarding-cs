@@ -9,7 +9,7 @@ namespace ItemList.ServiceLayer
     {
         public void RegisterTypes(IIoCContainer container)
         {
-            container.RegisterRequestScope<IGuidGenerator, GuidGenerator>();
+            container.RegisterRequestScoped<IGuidGenerator, GuidGenerator>();
         }
     }
 }
