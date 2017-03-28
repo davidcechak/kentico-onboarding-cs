@@ -7,13 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.Api", "Source\Item
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.Api.Tests", "Tests\ItemList.Api.Tests\ItemList.Api.Tests.csproj", "{B653C822-B2D2-42C4-8BF3-4FE2AF2DDF21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.DatabaseLayer", "Source\ItemList.DatabaseLayer\ItemList.DatabaseLayer.csproj", "{85498898-533E-4446-B3D2-5E51E05635C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.Database", "Source\ItemList.Database\ItemList.Database.csproj", "{85498898-533E-4446-B3D2-5E51E05635C0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.Contracts", "Source\ItemList.Contracts\ItemList.Contracts.csproj", "{8BD82302-C4B5-4CCE-AC2D-7845C743AADC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.IoCBootstraper", "Source\ItemList.IoCBootstraper\ItemList.IoCBootstraper.csproj", "{557B0A30-4DEA-4B82-9EF8-8DD1F19B6AE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.ServiceLayer", "Source\ItemList.ServiceLayer\ItemList.ServiceLayer.csproj", "{139629F4-0D1B-4C0F-980D-720F98133EEC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.Services", "Source\ItemList.Services\ItemList.Services.csproj", "{139629F4-0D1B-4C0F-980D-720F98133EEC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C1F1237A-E627-4586-93E2-156DA1A5249E}"
 EndProject

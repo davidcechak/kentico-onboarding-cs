@@ -68,9 +68,9 @@
       <Project>{8BD82302-C4B5-4CCE-AC2D-7845C743AADC}</Project>
       <Name>ItemList.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\ItemList.ServiceLayer\ItemList.ServiceLayer.csproj">
+    <ProjectReference Include="..\..\Source\ItemList.Services\ItemList.Services.csproj">
       <Project>{139629F4-0D1B-4C0F-980D-720F98133EEC}</Project>
-      <Name>ItemList.ServiceLayer</Name>
+      <Name>ItemList.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\Contracts.Tests.Base\Contracts.Tests.Base.csproj">
       <Project>{b016245c-cc90-45d5-9343-74a4b3b28731}</Project>
