@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{139629F4-0D1B-4C0F-980D-720F98133EEC}</ProjectGuid>
+    <ProjectGuid>{B016245C-CC90-45D5-9343-74A4B3B28731}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ItemList.ServiceLayer</RootNamespace>
-    <AssemblyName>ItemList.ServiceLayer</AssemblyName>
+    <RootNamespace>Contracts.Tests.Base</RootNamespace>
+    <AssemblyName>Contracts.Tests.Base</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=3.6.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NUnit.3.6.1\lib\net45\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,18 +44,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bootstraper.cs" />
-    <Compile Include="Items\ItemStoringService.cs" />
+    <Compile Include="Item\EqualContraintExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\IdentifierService.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\ItemList.Contracts\ItemList.Contracts.csproj">
+    <ProjectReference Include="..\..\Source\ItemList.Contracts\ItemList.Contracts.csproj">
       <Project>{8BD82302-C4B5-4CCE-AC2D-7845C743AADC}</Project>
       <Name>ItemList.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -22,18 +22,12 @@ namespace ItemList.Api.Controllers
             _identifierService = identifierService;
         }
 
-        public async Task<IHttpActionResult> Get()
-        {
-            var items = await _repository.GetAll();
-            return Ok(items);
-        }
+        public async Task<IHttpActionResult> Get() 
+            => Ok(await _repository.GetAll());
 
 
         public async Task<IHttpActionResult> Get(Guid id)
-        {
-            var item = await _repository.Get(id);
-            return Ok(item);
-        }
+            => Ok(await _repository.Get(id));
 
 
         public async Task<IHttpActionResult> Post(Item item)

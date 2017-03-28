@@ -3,7 +3,7 @@ using ItemList.Contracts.ServiceLayer;
 
 namespace ItemList.ServiceLayer.Utils
 {
-    public class IdentifierService : IIdentifierService
+    internal class IdentifierService : IIdentifierService
     {
         public Guid GetIdentifier() => Guid.NewGuid();
     }

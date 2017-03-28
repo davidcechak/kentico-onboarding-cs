@@ -13,6 +13,7 @@ using ItemList.Contracts.Models;
 using ItemList.Contracts.ServiceLayer;
 using NSubstitute;
 using NUnit.Framework;
+using Contracts.Tests.Base.Item;
 
 namespace ItemList.Api.Tests
 {

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ItemList.ServiceLayer")]
+[assembly: AssemblyTitle("Contracts.Tests.Base")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Kentico software")]
-[assembly: AssemblyProduct("ItemList.ServiceLayer")]
+[assembly: AssemblyProduct("Contracts.Tests.Base")]
 [assembly: AssemblyCopyright("Copyright © Kentico software 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("139629f4-0d1b-4c0f-980d-720f98133eec")]
+[assembly: Guid("b016245c-cc90-45d5-9343-74a4b3b28731")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -35,4 +35,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
+[assembly: InternalsVisibleTo("ItemList.Api.Tests")]
 [assembly: InternalsVisibleTo("ItemList.Services.Tests")]

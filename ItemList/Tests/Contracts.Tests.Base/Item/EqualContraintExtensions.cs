@@ -1,24 +1,23 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using ItemList.Contracts.Models;
 using NUnit.Framework.Constraints;
 
-namespace ItemList.Api.Tests
+namespace Contracts.Tests.Base.Item
 {
     internal static class EqualContraintExtensions
     {
-        private sealed class ItemEqualityComparer : IEqualityComparer<Item>
+        private sealed class ItemEqualityComparer : IEqualityComparer<ItemList.Contracts.Models.Item>
         {
-            public bool Equals(Item x, Item y)
+            public bool Equals(ItemList.Contracts.Models.Item x, ItemList.Contracts.Models.Item y)
             {
                 if (ReferenceEquals(x, y)) return true;
                 if (ReferenceEquals(x, null)) return false;
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
-                return x.Id.Equals(y.Id) && string.Equals(x.Ueid, y.Ueid) && string.Equals(x.Value, y.Value);
+                return x.Id.Equals(y.Id) && string.Equals((string) x.Ueid, (string) y.Ueid) && string.Equals((string) x.Value, (string) y.Value);
             }
 
-            public int GetHashCode(Item obj)
+            public int GetHashCode(ItemList.Contracts.Models.Item obj)
             {
                 unchecked
                 {
