@@ -160,9 +160,9 @@
       <Project>{8bd82302-c4b5-4cce-ac2d-7845c743aadc}</Project>
       <Name>ItemList.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ItemList.IoCBootstraper\ItemList.IoCBootstraper.csproj">
+    <ProjectReference Include="..\ItemList.DependencyInjection\ItemList.DependencyInjection.csproj">
       <Project>{557b0a30-4dea-4b82-9ef8-8dd1f19b6ae6}</Project>
-      <Name>ItemList.IoCBootstraper</Name>
+      <Name>ItemList.DependencyInjection</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

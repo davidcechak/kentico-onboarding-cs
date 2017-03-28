@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.Database", "Source
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.Contracts", "Source\ItemList.Contracts\ItemList.Contracts.csproj", "{8BD82302-C4B5-4CCE-AC2D-7845C743AADC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.IoCBootstraper", "Source\ItemList.IoCBootstraper\ItemList.IoCBootstraper.csproj", "{557B0A30-4DEA-4B82-9EF8-8DD1F19B6AE6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.DependencyInjection", "Source\ItemList.DependencyInjection\ItemList.DependencyInjection.csproj", "{557B0A30-4DEA-4B82-9EF8-8DD1F19B6AE6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.Services", "Source\ItemList.Services\ItemList.Services.csproj", "{139629F4-0D1B-4C0F-980D-720F98133EEC}"
 EndProject
