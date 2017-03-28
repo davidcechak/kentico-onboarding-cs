@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using ItemList.Api.Controllers;
 using ItemList.Contracts.Api;
-using ItemList.Contracts.DatabaseLayer;
 using ItemList.Contracts.Models;
-using ItemList.Contracts.ServiceLayer;
 using NSubstitute;
 using NUnit.Framework;
 using Contracts.Tests.Base.Item;
+using ItemList.Contracts.Database;
+using ItemList.Contracts.Services;
 
 namespace ItemList.Api.Tests
 {

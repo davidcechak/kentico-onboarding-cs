@@ -1,10 +1,9 @@
 ﻿using System.Threading.Tasks;
-using ItemList.Contracts.Api;
-using ItemList.Contracts.DatabaseLayer;
+using ItemList.Contracts.Database;
 using ItemList.Contracts.Models;
-using ItemList.Contracts.ServiceLayer;
+using ItemList.Contracts.Services;
 
-namespace ItemList.ServiceLayer.Items
+namespace ItemList.Services.Items
 {
     internal class ItemStoringService
     {

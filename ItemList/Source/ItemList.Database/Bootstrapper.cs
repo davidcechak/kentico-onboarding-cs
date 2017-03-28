@@ -1,9 +1,9 @@
 ﻿using ItemList.Contracts.Api;
 using ItemList.Contracts.Bootstrap;
-using ItemList.Contracts.DatabaseLayer;
-using ItemList.DatabaseLayer.Repositories;
+using ItemList.Contracts.Database;
+using ItemList.Database.Repositories;
 
-namespace ItemList.DatabaseLayer
+namespace ItemList.Database
 {
     public class Bootstrapper : IBootstrapper
     {

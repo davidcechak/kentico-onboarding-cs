@@ -1,8 +1,8 @@
 ﻿using System.Web.Http;
-using ItemList.IoCBootstraper.Adapters;
+using ItemList.DependencyInjection.Adapters;
 using Microsoft.Practices.Unity;
 
-namespace ItemList.IoCBootstraper
+namespace ItemList.DependencyInjection
 {
     public class RegisterContainer
     {

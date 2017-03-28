@@ -1,9 +1,9 @@
 ﻿using ItemList.Contracts.Api;
 using ItemList.Contracts.Bootstrap;
-using ItemList.Contracts.ServiceLayer;
-using ItemList.ServiceLayer.Wrappers;
+using ItemList.Contracts.Services;
+using ItemList.Services.Wrappers;
 
-namespace ItemList.ServiceLayer
+namespace ItemList.Services
 {
     public class Bootstrapper : IBootstrapper
     {

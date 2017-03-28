@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ItemList.Contracts.ServiceLayer
+namespace ItemList.Contracts.Services
 {
     public interface IIdentifierService
     {

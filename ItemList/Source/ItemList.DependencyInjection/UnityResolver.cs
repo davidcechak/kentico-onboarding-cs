@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Web.Http.Dependencies;
 using Microsoft.Practices.Unity;
 
-namespace ItemList.IoCBootstraper
+namespace ItemList.DependencyInjection
 {
     public class UnityResolver : IDependencyResolver
     {

@@ -1,14 +1,14 @@
-﻿using System.Web.Http.Controllers;
-using ItemList.Contracts.Api;
+﻿using ItemList.Contracts.Api;
+using ItemList.Database;
 
-namespace ItemList.IoCBootstraper
+namespace ItemList.DependencyInjection
 {
     internal static class Bootstrap
     {
         internal static void RegisterTypes(IIoCContainer container)
         {
-            var databaseBootstrapper = new DatabaseLayer.Bootstrapper();
-            var serviceBootstrapper = new ServiceLayer.Bootstrapper();
+            var databaseBootstrapper = new Bootstrapper();
+            var serviceBootstrapper = new Services.Bootstrapper();
             var apiBootstrapper = new Api.Services.Bootstrapper();
 
             apiBootstrapper.RegisterTypes(container);

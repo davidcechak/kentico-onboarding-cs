@@ -2,7 +2,7 @@ using System;
 using ItemList.Contracts.Api;
 using Microsoft.Practices.Unity;
 
-namespace ItemList.IoCBootstraper.Adapters
+namespace ItemList.DependencyInjection.Adapters
 {
     internal class UnityAdapter : IIoCContainer
     {

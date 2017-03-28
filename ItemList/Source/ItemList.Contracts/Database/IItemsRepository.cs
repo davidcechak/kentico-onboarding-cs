@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ItemList.Contracts.Models;
 
-namespace ItemList.Contracts.DatabaseLayer
+namespace ItemList.Contracts.Database
 {
     public interface IItemsRepository
     {

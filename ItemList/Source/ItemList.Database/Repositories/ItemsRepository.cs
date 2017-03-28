@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ItemList.Contracts.DatabaseLayer;
+using ItemList.Contracts.Database;
 using ItemList.Contracts.Models;
 
-namespace ItemList.DatabaseLayer.Repositories
+namespace ItemList.Database.Repositories
 {
     public class ItemsRepository : IItemsRepository
     {
