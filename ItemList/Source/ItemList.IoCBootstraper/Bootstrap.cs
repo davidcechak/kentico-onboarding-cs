@@ -2,7 +2,7 @@
 
 namespace ItemList.IoCBootstraper
 {
-    public static class Bootstraper
+    public static class Bootstrap
     {
         public static void RegisterTypes(IIoCContainer container)
         {

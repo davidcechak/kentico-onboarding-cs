@@ -15,7 +15,7 @@ namespace ItemList.Api
             var container = new UnityContainer();
 
             var unityAdapter = new UnityAdapter(container);
-            Bootstraper.RegisterTypes(unityAdapter);
+            Bootstrap.RegisterTypes(unityAdapter);
             config.DependencyResolver = new UnityResolver(container);
 
             // Web API routes
