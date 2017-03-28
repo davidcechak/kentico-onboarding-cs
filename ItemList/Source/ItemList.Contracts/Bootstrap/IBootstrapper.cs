@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using ItemList.Contracts.Api;
+﻿using ItemList.Contracts.Api;
 
 namespace ItemList.Contracts.Bootstrap
 {

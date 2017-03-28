@@ -1,7 +1,4 @@
-﻿using System.Net.Http;
-using System.Web;
-using System.Web.Http;
-using Microsoft.Practices.Unity;
+﻿using System.Web.Http;
 
 namespace ItemList.Api
 {

@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Contracts.Tests.Base.Item;
 using ItemList.Api.Controllers;
 using ItemList.Contracts.Api;
+using ItemList.Contracts.Database;
 using ItemList.Contracts.Models;
+using ItemList.Contracts.Services;
 using NSubstitute;
 using NUnit.Framework;
-using Contracts.Tests.Base.Item;
-using ItemList.Contracts.Database;
-using ItemList.Contracts.Services;
 
 namespace ItemList.Api.Tests
 {

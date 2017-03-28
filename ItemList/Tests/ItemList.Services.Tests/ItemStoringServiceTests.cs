@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
-using ItemList.Contracts.Models;
-using NSubstitute;
-using NUnit.Framework;
 using Contracts.Tests.Base.Item;
 using ItemList.Contracts.Database;
+using ItemList.Contracts.Models;
 using ItemList.Contracts.Services;
 using ItemList.Services.Items;
+using NSubstitute;
+using NUnit.Framework;
 
 namespace ItemList.Services.Tests
 {
