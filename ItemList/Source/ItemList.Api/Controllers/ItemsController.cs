@@ -13,13 +13,13 @@ namespace ItemList.Api.Controllers
     {
         private readonly IItemUrlHelper _itemUrlHelper;
         private readonly IItemsRepository _repository;
-        private readonly IIdentifierService _identifierService;
+        private readonly IItemStoringService _itemStoringService;
 
-        public ItemsController(IItemUrlHelper itemUrlHelper, IItemsRepository repository, IIdentifierService identifierService)
+        public ItemsController(IItemUrlHelper itemUrlHelper, IItemsRepository repository, IItemStoringService itemStoringService)
         {
             _itemUrlHelper = itemUrlHelper;
             _repository = repository;
-            _identifierService = identifierService;
+            _itemStoringService = itemStoringService;
         }
 
         public async Task<IHttpActionResult> GetAsync() 
@@ -32,12 +32,11 @@ namespace ItemList.Api.Controllers
 
         public async Task<IHttpActionResult> PostAsync(Item item)
         {
-            item.Id = _identifierService.GetIdentifier();
-            await _repository.CreateAsync(item);
+            var newItem = await _itemStoringService.StoreNewItemAsync(item);
 
-            var location = _itemUrlHelper.GetUrl(item.Id);
+            var location = _itemUrlHelper.GetUrl(newItem.Id);
 
-            return Created(location, item);
+            return Created(location, newItem);
         }
 
 

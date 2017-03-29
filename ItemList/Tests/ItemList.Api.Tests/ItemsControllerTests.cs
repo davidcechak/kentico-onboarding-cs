@@ -21,7 +21,7 @@ namespace ItemList.Api.Tests
     {
         private ItemsController _itemsController;
         private IItemsRepository _repositoryMock;
-        private IIdentifierService _identifierServiceMock;
+        private IItemStoringService _itemStoringServiceMock;
 
         [SetUp]
         public void SetUp()
@@ -30,9 +30,9 @@ namespace ItemList.Api.Tests
             itemUrlHelperMock.GetUrl(Arg.Any<Guid>()).Returns(info => info.Arg<Guid>().ToString());
 
             _repositoryMock = Substitute.For<IItemsRepository>();
-            _identifierServiceMock = Substitute.For<IIdentifierService>();
+            _itemStoringServiceMock = Substitute.For<IItemStoringService>();
 
-            _itemsController = new ItemsController(itemUrlHelperMock, _repositoryMock, _identifierServiceMock)
+            _itemsController = new ItemsController(itemUrlHelperMock, _repositoryMock, _itemStoringServiceMock)
             {
                 Request = new HttpRequestMessage(),
                 Configuration = new HttpConfiguration()
@@ -109,19 +109,18 @@ namespace ItemList.Api.Tests
                 Value = "text4"
             };
             var postedItem = new Item { Ueid = expectedItem.Ueid, Value = expectedItem.Value };
-            Item itemSentToRepository = null;
-            _identifierServiceMock.GetIdentifier().Returns(expectedItem.Id);
-            _repositoryMock.CreateAsync(Arg.Do<Item>(item => { itemSentToRepository = item; })).Returns(Task.CompletedTask);
+            Item itemSentToService = null;
+            _itemStoringServiceMock.StoreNewItemAsync(Arg.Do<Item>(item => { itemSentToService = item; })).Returns(expectedItem);
 
             var result = await _itemsController.PostAsync(postedItem);
             var response = await result.ExecuteAsync(CancellationToken.None);
             Item actualItem;
             response.TryGetContentValue(out actualItem);
-            
+
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created));
             Assert.That(response.Headers.Location.ToString(), Does.EndWith(expectedItem.Id.ToString()).IgnoreCase);
             Assert.That(actualItem, Is.EqualTo(expectedItem).UsingItemComparer());
-            Assert.That(itemSentToRepository, Is.EqualTo(expectedItem).UsingItemComparer());
+            Assert.That(itemSentToService, Is.EqualTo(postedItem).UsingItemComparer());
         }
     }
 }

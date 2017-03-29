@@ -5,7 +5,7 @@ using ItemList.Contracts.Services;
 
 namespace ItemList.Services.Items
 {
-    internal class ItemStoringService
+    internal class ItemStoringService : IItemStoringService
     {
         private readonly IIdentifierService _identifierService;
         private readonly IItemsRepository _itemRepository;
