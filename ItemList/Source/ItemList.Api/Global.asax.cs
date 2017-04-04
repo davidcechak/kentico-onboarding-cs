@@ -1,5 +1,4 @@
 ﻿using System.Web.Http;
-using ItemList.DependencyInjection;
 
 namespace ItemList.Api
 {
@@ -8,7 +7,7 @@ namespace ItemList.Api
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            GlobalConfiguration.Configure(RegisterContainer.Register);
+            GlobalConfiguration.Configure(BootstrapConfig.Register);
         }
     }
 }
