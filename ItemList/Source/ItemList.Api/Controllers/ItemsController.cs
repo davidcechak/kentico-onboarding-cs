@@ -1,4 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -27,11 +30,21 @@ namespace ItemList.Api.Controllers
 
 
         public async Task<IHttpActionResult> GetAsync(Guid id)
-            => Ok(await _repository.GetAsync(id));
+        {
+            if (id == Guid.Empty)
+            {
+                throw new ArgumentException("You have passed in invalid id.");
+            }
+            return Ok(await _repository.GetAsync(id));
+        }
 
 
         public async Task<IHttpActionResult> PostAsync(Item item)
         {
+            if (!ModelState.IsValid)
+            {
+                throw new ArgumentException("You have passed in invalid item.");
+            }
             var newItem = await _itemStoringService.StoreNewItemAsync(item);
 
             var location = _itemUrlHelper.GetUrl(newItem.Id);

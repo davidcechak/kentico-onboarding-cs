@@ -1,5 +1,4 @@
-﻿using ItemList.Contracts.Api;
-using ItemList.Contracts.DependencyInjection;
+﻿using ItemList.Contracts.DependencyInjection;
 using ItemList.Contracts.Services;
 using ItemList.Services.Items;
 using ItemList.Services.Wrappers;
@@ -12,6 +11,7 @@ namespace ItemList.Services
         {
             container.RegisterRequestScoped<IIdentifierService, IdentifierService>();
             container.RegisterRequestScoped<IItemStoringService, ItemStoringService>();
+            container.RegisterRequestScoped<ITimeService, TimeService>();
         }
     }
 }
