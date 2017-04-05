@@ -57,6 +57,7 @@
     <Compile Include="IdentifierServiceTests.cs" />
     <Compile Include="ItemStoringServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimeServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
