@@ -1,5 +1,4 @@
 using System;
-using ItemList.Contracts.Api;
 using ItemList.Contracts.DependencyInjection;
 using Microsoft.Practices.Unity;
 

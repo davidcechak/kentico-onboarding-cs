@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ItemList.Contracts.Api
+﻿namespace ItemList.Contracts.Api
 {
     public interface IDatabaseConfiguration
     {

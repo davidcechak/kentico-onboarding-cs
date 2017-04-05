@@ -2,7 +2,6 @@
 using System.Threading;
 using ItemList.Services.Wrappers;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 
 namespace ItemList.Services.Tests
 {

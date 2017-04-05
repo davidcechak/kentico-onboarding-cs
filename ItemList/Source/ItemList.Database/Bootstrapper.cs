@@ -1,6 +1,5 @@
-﻿using ItemList.Contracts.Api;
+﻿using ItemList.Contracts.Database;
 using ItemList.Contracts.DependencyInjection;
-using ItemList.Contracts.Database;
 using ItemList.Database.Repositories;
 
 namespace ItemList.Database
