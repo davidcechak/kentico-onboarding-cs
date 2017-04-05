@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
-using ItemList.Contracts.Bootstrap;
+using ItemList.Contracts.DependencyInjection;
 using ItemList.DependencyInjection.Adapters;
 using Microsoft.Practices.Unity;
 
@@ -26,7 +26,8 @@ namespace ItemList.DependencyInjection.Builder
             {
                 instance.RegisterTypes(unityAdapter);
             }
-
+            
+            // Register this instance, so it works like singleton
             container.RegisterInstance<IBootstrap>(this);
 
             _config.DependencyResolver = new UnityResolver(container);
