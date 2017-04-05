@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
-using ItemList.Contracts.Bootstrap;
+using ItemList.Contracts.DependencyInjection;
 using ItemList.DependencyInjection.Builder;
 
 namespace ItemList.DependencyInjection

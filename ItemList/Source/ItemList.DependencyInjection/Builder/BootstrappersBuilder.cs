@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ItemList.Contracts.Bootstrap;
+using ItemList.Contracts.DependencyInjection;
 
-namespace ItemList.DependencyInjection
+namespace ItemList.DependencyInjection.Builder
 {
     internal class BootstrappersBuilder : IBootstrappersBuilder
     {

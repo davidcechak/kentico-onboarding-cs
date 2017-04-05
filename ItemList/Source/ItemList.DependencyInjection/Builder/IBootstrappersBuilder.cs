@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ItemList.Contracts.Bootstrap;
+using ItemList.Contracts.DependencyInjection;
 
 namespace ItemList.DependencyInjection.Builder
 {

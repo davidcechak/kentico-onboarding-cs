@@ -1,10 +1,11 @@
 using System;
 using ItemList.Contracts.Api;
+using ItemList.Contracts.DependencyInjection;
 using Microsoft.Practices.Unity;
 
 namespace ItemList.DependencyInjection.Adapters
 {
-    internal class UnityAdapter : IIoCContainer
+    internal class UnityAdapter : IDependencyInjectionContainer
     {
         private readonly UnityContainer _container;
 
