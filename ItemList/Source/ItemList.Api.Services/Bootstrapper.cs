@@ -12,7 +12,7 @@ namespace ItemList.Api.Services
         {
             container.RegisterRequestScoped<IItemUrlHelper, ItemUrlHelper>();
             container.RegisterRequestScoped(() => (HttpRequestMessage)HttpContext.Current.Items["MS_HttpRequestMessage"]);
-            container.RegisterRequestScoped<IConnectionStrings, ConnectionStrings>();
+            container.RegisterRequestScoped<IDatabaseConfiguration, DatabaseConfiguration>();
         }
     }
 }
