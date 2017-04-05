@@ -8,6 +8,7 @@ namespace ItemList.Api
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
             GlobalConfiguration.Configure(BootstrapConfig.Register);
+            GlobalConfiguration.Configure(FormatterConfig.Register);
         }
     }
 }

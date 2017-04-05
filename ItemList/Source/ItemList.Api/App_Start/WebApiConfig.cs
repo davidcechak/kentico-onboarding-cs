@@ -8,8 +8,6 @@ namespace ItemList.Api
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
             // Web API routes
             config.MapHttpAttributeRoutes();
 
