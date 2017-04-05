@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace ItemList.Contracts.Api
+namespace ItemList.Contracts.DependencyInjection
 {
-    public interface IIoCContainer
+    public interface IDependencyInjectionContainer
     {
         void RegisterRequestScoped<TType, TImplementation>() 
             where TImplementation : TType;

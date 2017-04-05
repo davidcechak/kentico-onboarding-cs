@@ -44,10 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\IIoCContainer.cs" />
+    <Compile Include="DependencyInjection\IDependencyInjectionContainer.cs" />
     <Compile Include="Api\IItemUrlHelper.cs" />
-    <Compile Include="Bootstrap\IBootstrapper.cs" />
-    <Compile Include="Bootstrap\IBootstrap.cs" />
+    <Compile Include="DependencyInjection\IBootstrapper.cs" />
+    <Compile Include="DependencyInjection\IBootstrap.cs" />
     <Compile Include="Database\IItemsRepository.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

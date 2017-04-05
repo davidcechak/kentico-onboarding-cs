@@ -1,4 +1,4 @@
-﻿namespace ItemList.Contracts.Bootstrap
+﻿namespace ItemList.Contracts.DependencyInjection
 {
     public interface IBootstrap
     {
