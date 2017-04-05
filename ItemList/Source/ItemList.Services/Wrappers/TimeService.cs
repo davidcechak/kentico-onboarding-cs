@@ -5,9 +5,7 @@ namespace ItemList.Services.Wrappers
 {
     public class TimeService : ITimeService
     {
-        public DateTime Now()
-        {
-            return DateTime.Now;
-        }
+
+        public DateTime Now() => DateTime.Now;
     }
 }
