@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Contracts.Tests.Base.Item;
+using Contracts.Tests.Base;
 using ItemList.Api.Controllers;
 using ItemList.Contracts.Api;
 using ItemList.Contracts.Database;
