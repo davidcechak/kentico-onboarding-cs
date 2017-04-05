@@ -33,7 +33,7 @@ namespace ItemList.Api.Controllers
         {
             if (id == Guid.Empty)
             {
-                throw new ArgumentException("You have passed in invalid id.");
+                return StatusCode(HttpStatusCode.NotFound);
             }
             return Ok(await _repository.GetAsync(id));
         }
@@ -43,7 +43,7 @@ namespace ItemList.Api.Controllers
         {
             if (!ModelState.IsValid)
             {
-                throw new ArgumentException("You have passed in invalid item.");
+                return StatusCode(HttpStatusCode.BadRequest);
             }
             var newItem = await _itemStoringService.StoreNewItemAsync(item);
 
@@ -55,6 +55,10 @@ namespace ItemList.Api.Controllers
 
         public async Task<IHttpActionResult> DeleteAsync(Guid id)
         {
+            if (id == Guid.Empty)
+            {
+                return StatusCode(HttpStatusCode.NotFound);
+            }
             await _repository.DeleteAsync(id);
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -62,6 +66,10 @@ namespace ItemList.Api.Controllers
 
         public async Task<IHttpActionResult> PutAsync(Item item)
         {
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(HttpStatusCode.BadRequest);
+            }
             await _repository.UpdateAsync(item);
             return StatusCode(HttpStatusCode.NoContent);
         }
