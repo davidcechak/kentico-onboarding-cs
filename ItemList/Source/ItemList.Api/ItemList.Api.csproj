@@ -140,7 +140,6 @@
     <Compile Include="App_Start\BootstrapConfig.cs" />
     <Compile Include="App_Start\FormatterConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="ConnectionStrings.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
