@@ -40,7 +40,7 @@ namespace ItemList.Api.Tests
         }
 
         [Test]
-        public async Task Get_WithoutParameters_ReturnsAllItems()
+        public async Task GetAsync_WithoutParameters_ReturnsAllItems()
         {
             IEnumerable<Item> expectedItems = new List<Item> {
                 new Item { Id = new Guid("7383243d-9230-4a6c-94ea-122e151208ca"), Value = "text1" },
@@ -58,7 +58,7 @@ namespace ItemList.Api.Tests
         }
 
         [Test]
-        public async Task Get_ExistingId_ReturnsDummyItem()
+        public async Task GetAsync_ExistingId_ReturnsDummyItem()
         {
             var id = new Guid("331c43f5-11af-43a4-83d1-7d949ae5a8d7");
             var expectedItem = new Item { Id = id, Value = "text3" };
@@ -74,7 +74,7 @@ namespace ItemList.Api.Tests
         }
 
         [Test]
-        public async Task Delete_ExistingId_ReturnsNoContent()
+        public async Task DeleteAsync_ExistingId_ReturnsNoContent()
         {
             var id = new Guid("331c43f5-11af-43a4-83d1-7d949ae5a8d7");
 
@@ -86,7 +86,7 @@ namespace ItemList.Api.Tests
         }
 
         [Test]
-        public async Task Put_ExitingId_ReturnsNoContent()
+        public async Task PutAsync_ExitingId_ReturnsNoContent()
         {
             var itemToPut = new Item { Id = new Guid("331c43f5-11af-43a4-83d1-7d949ae5a8d7"), Value = "text3" };
             var itemSentToRepository = new Item();
@@ -100,7 +100,7 @@ namespace ItemList.Api.Tests
         }
 
         [Test]
-        public async Task Post_ValidItem_ReturnsDummyItemAndUrl()
+        public async Task PostAsync_ValidItem_ReturnsDummyItemAndUrl()
         {
             var expectedItem = new Item
             {
