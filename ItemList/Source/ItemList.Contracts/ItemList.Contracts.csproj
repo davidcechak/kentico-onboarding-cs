@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\IConnectionStrings.cs" />
     <Compile Include="DependencyInjection\IDependencyInjectionContainer.cs" />
     <Compile Include="Api\IItemUrlHelper.cs" />
     <Compile Include="DependencyInjection\IBootstrapper.cs" />
