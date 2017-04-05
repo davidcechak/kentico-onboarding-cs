@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ItemList.Contracts.Models
 {
@@ -6,8 +7,11 @@ namespace ItemList.Contracts.Models
     {
         public Guid Id { get; set; }
 
+        [Required]
         public string Ueid { get; set; }
 
+        [Required]
+        [StringLength(200, MinimumLength = 1)]
         public string Value { get; set; }
 
         public DateTime Created { get; set; }
