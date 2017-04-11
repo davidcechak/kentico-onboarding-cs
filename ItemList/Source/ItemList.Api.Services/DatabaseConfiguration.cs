@@ -5,15 +5,11 @@ namespace ItemList.Api.Services
 {
     public class DatabaseConfiguration : IDatabaseConfiguration
     {
-        private readonly string _connectionString;
+        public string DefaultConnectionString { get; }
 
-        public DatabaseConfiguration()
+        public DatabaseConfiguration(string defaultConnectionString)
         {
-            _connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-        }
-        public string GetConnectionString()
-        {
-            return _connectionString;
+            DefaultConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace ItemList.Database.Repositories
 
         public ItemsRepository(IDatabaseConfiguration databaseConfiguration)
         {
-            var client = new MongoClient(databaseConfiguration.GetConnectionString());
+            var client = new MongoClient(databaseConfiguration.DefaultConnectionString);
             var database = client.GetDatabase("itemlist");
             _collection = database.GetCollection<Item>("Items");
         }
