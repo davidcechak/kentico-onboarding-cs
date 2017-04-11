@@ -2,6 +2,7 @@
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.ModelBinding;
 using ItemList.Contracts.Api;
 using ItemList.Contracts.Database;
 using ItemList.Contracts.Models;
@@ -14,6 +15,26 @@ namespace ItemList.Api.Controllers
         private readonly IItemUrlHelper _itemUrlHelper;
         private readonly IItemsRepository _repository;
         private readonly IItemStoringService _itemStoringService;
+
+        private void ValidateItem(Item item, ModelStateDictionary modelState)
+        {
+            if (item.Id != Guid.Empty)
+            {
+                modelState.AddModelError(nameof(item.Id), "Id of item will be overwritten so should be empty.");
+            }
+            if (string.IsNullOrEmpty(item.Ueid))
+            {
+                modelState.AddModelError(nameof(item.Ueid), "Ueid should not be empty.");
+            }
+            if (string.IsNullOrEmpty(item.Value))
+            {
+                modelState.AddModelError(nameof(item.Value), "Value should not be empty.");
+            }
+            if (item.Value.Length > 200)
+            {
+                modelState.AddModelError(nameof(item.Value), "Value cannot exceed 200 characters.");
+            }
+        }
 
         public ItemsController(IItemUrlHelper itemUrlHelper, IItemsRepository repository, IItemStoringService itemStoringService)
         {
@@ -30,7 +51,7 @@ namespace ItemList.Api.Controllers
         {
             if (id == Guid.Empty)
             {
-                return StatusCode(HttpStatusCode.NotFound);
+                return NotFound();
             }
             return Ok(await _repository.GetAsync(id));
         }
@@ -38,9 +59,10 @@ namespace ItemList.Api.Controllers
 
         public async Task<IHttpActionResult> PostAsync(Item item)
         {
+            ValidateItem(item, ModelState);
             if (!ModelState.IsValid)
             {
-                return StatusCode(HttpStatusCode.BadRequest);
+                return BadRequest(ModelState);
             }
             var newItem = await _itemStoringService.StoreNewItemAsync(item);
 
@@ -49,13 +71,8 @@ namespace ItemList.Api.Controllers
             return Created(location, newItem);
         }
 
-
         public async Task<IHttpActionResult> DeleteAsync(Guid id)
         {
-            if (id == Guid.Empty)
-            {
-                return StatusCode(HttpStatusCode.NotFound);
-            }
             await _repository.DeleteAsync(id);
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -63,10 +80,6 @@ namespace ItemList.Api.Controllers
 
         public async Task<IHttpActionResult> PutAsync(Item item)
         {
-            if (!ModelState.IsValid)
-            {
-                return StatusCode(HttpStatusCode.BadRequest);
-            }
             await _repository.UpdateAsync(item);
             return StatusCode(HttpStatusCode.NoContent);
         }

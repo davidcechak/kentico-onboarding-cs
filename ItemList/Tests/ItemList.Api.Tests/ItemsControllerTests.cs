@@ -74,6 +74,17 @@ namespace ItemList.Api.Tests
         }
 
         [Test]
+        public async Task GetAsync_DefaultGuid_ReturnsNotFound()
+        {
+            Guid id = Guid.Empty;
+
+            var result = await _itemsController.GetAsync(id);
+            var response = await result.ExecuteAsync(CancellationToken.None);
+            
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
+        }
+
+        [Test]
         public async Task DeleteAsync_ExistingId_ReturnsNoContent()
         {
             var id = new Guid("331c43f5-11af-43a4-83d1-7d949ae5a8d7");
@@ -104,7 +115,7 @@ namespace ItemList.Api.Tests
         {
             var expectedItem = new Item
             {
-                Id = new Guid("5081544A-5584-4449-B0CD-72B2BFF0AF30"),
+                Id = Guid.Empty,
                 Ueid = "Hello Susan",
                 Value = "text4"
             };
@@ -121,6 +132,22 @@ namespace ItemList.Api.Tests
             Assert.That(response.Headers.Location.ToString(), Does.EndWith(expectedItem.Id.ToString()).IgnoreCase);
             Assert.That(actualItem, Is.EqualTo(expectedItem).UsingItemComparer());
             Assert.That(itemSentToService, Is.EqualTo(postedItem).UsingItemComparer());
+        }
+
+        [Test]
+        public async Task PostAsync_InvalidItem_ReturnsBadRequest()
+        {
+            var postedItem = new Item
+            {
+                Id = new Guid("5081544A-5584-4449-B0CD-72B2BFF0AF30"),
+                Ueid = "",
+                Value = ""
+            };
+
+            var result = await _itemsController.PostAsync(postedItem);
+            var response = await result.ExecuteAsync(CancellationToken.None);
+
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
         }
     }
 }
