@@ -11,12 +11,14 @@ namespace ItemList.Database.Repositories
     public class ItemsRepository : IItemsRepository
     {
         private readonly IMongoCollection<Item> _collection;
+        private const string CollectionName = "Items";
+        private const string DatabaseName = "itemlist";
 
         public ItemsRepository(IDatabaseConfiguration databaseConfiguration)
         {
             var client = new MongoClient(databaseConfiguration.DefaultConnectionString);
-            var database = client.GetDatabase("itemlist");
-            _collection = database.GetCollection<Item>("Items");
+            var database = client.GetDatabase(DatabaseName);
+            _collection = database.GetCollection<Item>(CollectionName);
         }
         public async Task<IEnumerable<Item>> GetAllAsync()
         {
