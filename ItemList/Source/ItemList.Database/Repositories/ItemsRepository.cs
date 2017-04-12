@@ -20,11 +20,8 @@ namespace ItemList.Database.Repositories
             var database = client.GetDatabase(DatabaseName);
             _collection = database.GetCollection<Item>(CollectionName);
         }
-        public async Task<IEnumerable<Item>> GetAllAsync()
-        {
-            var result = await _collection.FindAsync(FilterDefinition<Item>.Empty);
-            return result.ToEnumerable();
-        }
+        public async Task<IEnumerable<Item>> GetAllAsync() 
+            => (await _collection.FindAsync(FilterDefinition<Item>.Empty)).ToEnumerable();
 
         public async Task<Item> GetAsync(Guid id)
         {
