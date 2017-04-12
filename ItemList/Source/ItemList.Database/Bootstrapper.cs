@@ -8,7 +8,7 @@ namespace ItemList.Database
     {
         public void RegisterTypes(IDependencyInjectionContainer container)
         {
-            container.RegisterRequestScoped<IItemsRepository, ItemsRepository>();
+            container.RegisterSingleton<IItemsRepository, ItemsRepository>();
         }
     }
 }
