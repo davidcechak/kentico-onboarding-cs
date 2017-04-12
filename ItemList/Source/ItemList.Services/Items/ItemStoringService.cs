@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using ItemList.Contracts.Database;
 using ItemList.Contracts.Models;
 using ItemList.Contracts.Services;
@@ -20,19 +21,19 @@ namespace ItemList.Services.Items
 
         public async Task<Item> StoreNewItemAsync(Item item)
         {
-            Item newItem = CreateItemWithNewId(item);
+            Item newItem = CreateItemWithNewId(item, _timeService.Now());
             await _itemRepository.CreateAsync(newItem);
 
             return newItem;
         }
 
-        private Item CreateItemWithNewId(Item item) => new Item
+        private Item CreateItemWithNewId(Item item, DateTime creationTime) => new Item
         {
             Id = _identifierService.GetIdentifier(),
             Ueid = item.Ueid,
             Value = item.Value,
-            Created = _timeService.Now(),
-            LastUpdated = _timeService.Now()
+            Created = creationTime,
+            LastUpdated = creationTime
         };
     }
 }
