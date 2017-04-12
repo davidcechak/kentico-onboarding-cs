@@ -7,7 +7,7 @@ namespace ItemList.Api.Services
     {
         public string DefaultConnectionString { get; }
 
-        public DatabaseConfiguration(string defaultConnectionString)
+        public DatabaseConfiguration()
         {
             DefaultConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         }
