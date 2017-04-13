@@ -11,5 +11,7 @@ namespace ItemList.Contracts.DependencyInjection
 
         void RegisterSingleton<TType, TImplementation>()
             where TImplementation : TType;
+
+        void RegisterSingleton<TType>(Func<TType> implementationFactory);
     }
 }

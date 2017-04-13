@@ -27,5 +27,10 @@ namespace ItemList.DependencyInjection.Adapters
         {
             _container.RegisterType<TInterface, TImplementation>(new ContainerControlledLifetimeManager());
         }
+
+        public void RegisterSingleton<TType>(Func<TType> implementationFactory)
+        {
+            _container.RegisterInstance(new InjectionFactory(_ => implementationFactory()));
+        }
     }
 }
