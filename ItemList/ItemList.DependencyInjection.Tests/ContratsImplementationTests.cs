@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using ItemList.Contracts.DependencyInjection;
@@ -42,47 +43,31 @@ namespace ItemList.DependencyInjection.Tests
         [Test]
         public void AllContractsHaveRegisteredImplementation()
         {
-            var bootstrapperRegistrations = BootstrapFactory.Bootstrappers.Value;
-            var bootstrap = new Bootstrap(bootstrapperRegistrations, _resolverMock);
-            ICollection<string> expectedRegisteredContracts = new List<string>();
+            var bootstrap = new Bootstrap(BootstrapFactory.Bootstrappers.Value, _resolverMock);
             Assembly contractsAssembly = typeof(IDependencyInjectionContainer).Assembly;
-            foreach (Type type in contractsAssembly.GetTypes())
-            {
-                if (type.IsInterface)
-                {
-                    expectedRegisteredContracts.Add(type.FullName);
-                }
-            }
+            var expectedRegisteredContracts = contractsAssembly
+                .GetTypes()
+                .Where(type => type.IsInterface)
+                .Select(type => type.FullName)
+                .ToList();
+            // container should not register itself
             expectedRegisteredContracts.Remove(typeof(IDependencyInjectionContainer).FullName);
+            // IBootstrapper is pattern for Bootstrapper classes, does not have specific implementation
             expectedRegisteredContracts.Remove(typeof(IBootstrapper).FullName);
+            // WebApi should have HttpRequestMessage registered
             expectedRegisteredContracts.Add(typeof(HttpRequestMessage).FullName);
 
             bootstrap.RegisterDependencies();
             var actualRegisteredContracts = _containerMock.RegisteredContracts;
 
-            Assert.That(actualRegisteredContracts, Is.EquivalentTo(expectedRegisteredContracts));
+            const string firstSeparator = ",\n\t\t\t\t\t\t\t\t   ";
+            const string secondSeparator = ",\n\t\t\t\t\t\t  ";
+            Assert.That(
+                actualRegisteredContracts,
+                Is.EquivalentTo(expectedRegisteredContracts),
+                $"This should not be registered: [ {string.Join(firstSeparator, actualRegisteredContracts.Except(expectedRegisteredContracts))} ],\n\n" +
+                $"This is not registered: [ {string.Join(secondSeparator, expectedRegisteredContracts.Except(actualRegisteredContracts))} ],\n"
+                );
         }
-    }
-
-    internal class ContainerMock : IDependencyInjectionContainer
-    {
-        private readonly ICollection<string> _registeredContracts = new List<string>();
-
-        public IEnumerable<string> RegisteredContracts => _registeredContracts;
-
-        public void RegisterRequestScoped<TType, TImplementation>()
-            where TImplementation : TType 
-            => AddTypeFullName<TType>();
-
-        public void RegisterRequestScoped<TType>(Func<TType> implementationFactory)
-            => AddTypeFullName<TType>();
-
-        public void RegisterSingleton<TType, TImplementation>() 
-            where TImplementation : TType
-            => AddTypeFullName<TType>();
-
-        private void AddTypeFullName<TType>() => _registeredContracts.Add(typeof(TType).FullName);
-
-        public void RegisterSingleton<TType>(Func<TType> implementationFactory) => AddTypeFullName<TType>();
     }
 }
