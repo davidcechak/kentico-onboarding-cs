@@ -27,30 +27,40 @@ namespace ItemList.DependencyInjection.Tests
         public void AllContractsHaveRegisteredImplementation()
         {
             var bootstrap = new Bootstrap(BootstrapFactory.Bootstrappers.Value, _resolverMock);
-            Assembly contractsAssembly = typeof(IDependencyInjectionContainer).Assembly;
-            var expectedRegisteredContracts = contractsAssembly
-                .GetTypes()
-                .Where(type => type.IsInterface)
-                .Select(type => type.FullName)
-                .ToList();
-            // container should not register itself
-            expectedRegisteredContracts.Remove(typeof(IDependencyInjectionContainer).FullName);
-            // IBootstrapper is pattern for Bootstrapper classes, does not have specific implementation
-            expectedRegisteredContracts.Remove(typeof(IBootstrapper).FullName);
-            // WebApi should have HttpRequestMessage registered
-            expectedRegisteredContracts.Add(typeof(HttpRequestMessage).FullName);
+            var expectedContracts = GetExpectedContracts();
 
             bootstrap.RegisterDependencies();
-            var actualRegisteredContracts = _containerMock.RegisteredContracts;
+            var actualContracts = _containerMock.RegisteredContracts;
 
             const string firstSeparator = ",\n\t\t\t\t\t\t\t\t   ";
             const string secondSeparator = ",\n\t\t\t\t\t\t  ";
             Assert.That(
-                actualRegisteredContracts,
-                Is.EquivalentTo(expectedRegisteredContracts),
-                $"This should not be registered: [ {string.Join(firstSeparator, actualRegisteredContracts.Except(expectedRegisteredContracts))} ],\n\n" +
-                $"This is not registered: [ {string.Join(secondSeparator, expectedRegisteredContracts.Except(actualRegisteredContracts))} ],\n"
+                actualContracts,
+                Is.EquivalentTo(expectedContracts),
+                $"This should not be registered: [ {string.Join(firstSeparator, actualContracts.Except(expectedContracts))} ],\n\n" +
+                $"This is not registered: [ {string.Join(secondSeparator, expectedContracts.Except(actualContracts))} ],\n"
                 );
+        }
+
+        private List<string> GetExpectedContracts()
+        {
+            Assembly contractsAssembly = typeof(IDependencyInjectionContainer).Assembly;
+            var expectedContracts = contractsAssembly
+                .GetTypes()
+                .Where(type => type.IsInterface)
+                .Select(type => type.FullName)
+                .ToList();
+
+            // container should not register itself
+            expectedContracts.Remove(typeof(IDependencyInjectionContainer).FullName);
+
+            // IBootstrapper is pattern for Bootstrapper classes, does not have specific implementation
+            expectedContracts.Remove(typeof(IBootstrapper).FullName);
+
+            // WebApi should have HttpRequestMessage registered
+            expectedContracts.Add(typeof(HttpRequestMessage).FullName);
+
+            return expectedContracts;
         }
 
         private void SetUpResolverMock()
