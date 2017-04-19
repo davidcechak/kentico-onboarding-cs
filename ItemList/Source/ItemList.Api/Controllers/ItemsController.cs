@@ -51,7 +51,6 @@ namespace ItemList.Api.Controllers
         public async Task<IHttpActionResult> GetAsync() 
             => Ok(await _repository.GetAllAsync());
 
-
         public async Task<IHttpActionResult> GetAsync(Guid id)
         {
             if (id == Guid.Empty)
@@ -65,7 +64,6 @@ namespace ItemList.Api.Controllers
             }
             return Ok(result);
         }
-
 
         public async Task<IHttpActionResult> PostAsync(Item item)
         {
@@ -81,13 +79,14 @@ namespace ItemList.Api.Controllers
             return Created(location, newItem);
         }
 
+        // dummy implementation
         public async Task<IHttpActionResult> DeleteAsync(Guid id)
         {
             await _repository.DeleteAsync(id);
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-
+        // dummy implementation
         public async Task<IHttpActionResult> PutAsync(Item item)
         {
             await _repository.UpdateAsync(item);
