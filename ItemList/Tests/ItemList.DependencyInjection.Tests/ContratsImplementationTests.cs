@@ -30,7 +30,7 @@ namespace ItemList.DependencyInjection.Tests
             var expectedContracts = GetExpectedContracts();
 
             bootstrap.RegisterDependencies();
-            var actualContracts = _containerMock.RegisteredContracts;
+            var actualContracts = _containerMock.RegisteredContracts.ToArray();
 
             Assert.That(
                 actualContracts,
@@ -39,12 +39,12 @@ namespace ItemList.DependencyInjection.Tests
                 );
         }
 
-        private static string GetErrorMessage(IEnumerable<string> actualContracts, IEnumerable<string> expectedContracts)
+        private static string GetErrorMessage(ICollection<string> actualContracts, ICollection<string> expectedContracts)
         {
-            return $@"This should not be registered: [ {string.Join(CreateSeparator("\n", 8, 3), actualContracts.Except(expectedContracts))} ],
-
-  This is not registered: [ {string.Join(CreateSeparator("\n", 7, 0), expectedContracts.Except(actualContracts))} ],
-";
+            var unexpectedContracts = string.Join(CreateSeparator("\n", 8, 3), actualContracts.Except(expectedContracts));
+            var missingContracts = string.Join(CreateSeparator("\n", 7, 3), expectedContracts.Except(actualContracts));
+            return $"This should not be registered: [ {unexpectedContracts} ],\n\n" +
+                $"  This should be registered: [ {missingContracts} ], \n";
         }
 
         private static string CreateSeparator(string initialString, int numberOfTabs, int numberOfSpaces)
@@ -67,7 +67,7 @@ namespace ItemList.DependencyInjection.Tests
             // container should not register itself
             expectedContracts.Remove(typeof(IDependencyInjectionContainer).FullName);
 
-            // IBootstrapper is pattern for Bootstrapper classes, does not have specific implementation
+            // IBootstrapper is pattern for Bootstrapper classes, does not have only one specific implementation
             expectedContracts.Remove(typeof(IBootstrapper).FullName);
 
             // WebApi should have HttpRequestMessage registered
