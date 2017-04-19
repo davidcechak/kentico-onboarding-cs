@@ -16,31 +16,6 @@ namespace ItemList.Api.Controllers
         private readonly IItemsRepository _repository;
         private readonly IItemStoringService _itemStoringService;
 
-        private void ValidateItem(Item item, ModelStateDictionary modelState)
-        {
-            if (item == null)
-            {
-                modelState.AddModelError(nameof(item), "Item is not correct.");
-                return;
-            }
-            if (item.Id != Guid.Empty)
-            {
-                modelState.AddModelError(nameof(item.Id), "Id of item will be overwritten so should be empty.");
-            }
-            if (string.IsNullOrEmpty(item.Ueid))
-            {
-                modelState.AddModelError(nameof(item.Ueid), "Ueid should not be empty.");
-            }
-            if (string.IsNullOrEmpty(item.Value))
-            {
-                modelState.AddModelError(nameof(item.Value), "Value should not be empty.");
-            }
-            if (item.Value != null && item.Value.Length > 200)
-            {
-                modelState.AddModelError(nameof(item.Value), "Value cannot exceed 200 characters.");
-            }
-        }
-
         public ItemsController(IItemUrlHelper itemUrlHelper, IItemsRepository repository, IItemStoringService itemStoringService)
         {
             _itemUrlHelper = itemUrlHelper;
@@ -91,6 +66,31 @@ namespace ItemList.Api.Controllers
         {
             await _repository.UpdateAsync(item);
             return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        private void ValidateItem(Item item, ModelStateDictionary modelState)
+        {
+            if (item == null)
+            {
+                modelState.AddModelError(nameof(item), "Item is not correct.");
+                return;
+            }
+            if (item.Id != Guid.Empty)
+            {
+                modelState.AddModelError(nameof(item.Id), "Id of item will be overwritten so should be empty.");
+            }
+            if (string.IsNullOrEmpty(item.Ueid))
+            {
+                modelState.AddModelError(nameof(item.Ueid), "Ueid should not be empty.");
+            }
+            if (string.IsNullOrEmpty(item.Value))
+            {
+                modelState.AddModelError(nameof(item.Value), "Value should not be empty.");
+            }
+            if (item.Value != null && item.Value.Length > 200)
+            {
+                modelState.AddModelError(nameof(item.Value), "Value cannot exceed 200 characters.");
+            }
         }
     }
 }
