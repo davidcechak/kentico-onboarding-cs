@@ -32,14 +32,22 @@ namespace ItemList.DependencyInjection.Tests
             bootstrap.RegisterDependencies();
             var actualContracts = _containerMock.RegisteredContracts;
 
-            const string firstSeparator = ",\n\t\t\t\t\t\t\t\t   ";
-            const string secondSeparator = ",\n\t\t\t\t\t\t  ";
             Assert.That(
                 actualContracts,
                 Is.EquivalentTo(expectedContracts),
-                $"This should not be registered: [ {string.Join(firstSeparator, actualContracts.Except(expectedContracts))} ],\n\n" +
-                $"This is not registered: [ {string.Join(secondSeparator, expectedContracts.Except(actualContracts))} ],\n"
+                $@"This should not be registered: [ {string.Join(CreateSeparator("\n", 8, 3), actualContracts.Except(expectedContracts))} ],
+
+  This is not registered: [ {string.Join(CreateSeparator("\n", 7, 0), expectedContracts.Except(actualContracts))} ],
+"
                 );
+        }
+
+        private static string CreateSeparator(string initialString, int numberOfTabs, int numberOfSpaces)
+        {
+            var strings = new List<string> {initialString};
+            strings.AddRange(Enumerable.Repeat("\t", numberOfTabs).ToList());
+            strings.AddRange(Enumerable.Repeat(" ", numberOfSpaces));
+            return string.Concat(strings);
         }
 
         private List<string> GetExpectedContracts()
