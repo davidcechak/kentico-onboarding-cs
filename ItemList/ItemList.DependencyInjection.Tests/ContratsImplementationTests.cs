@@ -35,11 +35,16 @@ namespace ItemList.DependencyInjection.Tests
             Assert.That(
                 actualContracts,
                 Is.EquivalentTo(expectedContracts),
-                $@"This should not be registered: [ {string.Join(CreateSeparator("\n", 8, 3), actualContracts.Except(expectedContracts))} ],
+                GetErrorMessage(actualContracts, expectedContracts)
+                );
+        }
+
+        private static string GetErrorMessage(IEnumerable<string> actualContracts, IEnumerable<string> expectedContracts)
+        {
+            return $@"This should not be registered: [ {string.Join(CreateSeparator("\n", 8, 3), actualContracts.Except(expectedContracts))} ],
 
   This is not registered: [ {string.Join(CreateSeparator("\n", 7, 0), expectedContracts.Except(actualContracts))} ],
-"
-                );
+";
         }
 
         private static string CreateSeparator(string initialString, int numberOfTabs, int numberOfSpaces)
