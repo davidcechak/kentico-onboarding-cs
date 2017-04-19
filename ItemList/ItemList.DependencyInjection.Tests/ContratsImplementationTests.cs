@@ -19,7 +19,7 @@ namespace ItemList.DependencyInjection.Tests
         [SetUp]
         public void SetUp()
         {
-            _containerMock = new ContainerMock();
+            _containerMock = new ContainerMock(new HashSet<string>());
             _resolverMock = Substitute.For<IResolverBuilder>();
             _resolverMock
                 .RegisterDependencies(Arg.Any<Action<IDependencyInjectionContainer>>())
