@@ -58,7 +58,7 @@ namespace ItemList.Api.Tests
         }
 
         [Test]
-        public async Task GetAsync_ExistingId_ReturnsDummyItem()
+        public async Task GetAsync_ExistingId_ReturnsItem()
         {
             var id = new Guid("331c43f5-11af-43a4-83d1-7d949ae5a8d7");
             var expectedItem = new Item { Id = id, Value = "text3" };
@@ -81,6 +81,18 @@ namespace ItemList.Api.Tests
             var result = await _itemsController.GetAsync(id);
             var response = await result.ExecuteAsync(CancellationToken.None);
             
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
+        }
+
+        [Test]
+        public async Task GetAsync_NotExistingGuid_ReturnsNotFound()
+        {
+            var id = new Guid("331c43f5-11af-43a4-83d1-7d949ae5a8d7");
+            _repositoryMock.GetAsync(Arg.Is(id)).Returns(Task.FromResult<Item>(null));
+
+            var result = await _itemsController.GetAsync(id);
+            var response = await result.ExecuteAsync(CancellationToken.None);
+
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
         }
 
@@ -135,7 +147,7 @@ namespace ItemList.Api.Tests
         }
 
         [Test]
-        public async Task PostAsync_InvalidItem_ReturnsBadRequest()
+        public async Task PostAsync_InvalidItemWithEmptyStrings_ReturnsBadRequest()
         {
             var postedItem = new Item
             {
@@ -143,6 +155,26 @@ namespace ItemList.Api.Tests
                 Ueid = "",
                 Value = ""
             };
+
+            var result = await _itemsController.PostAsync(postedItem);
+            var response = await result.ExecuteAsync(CancellationToken.None);
+
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+        }
+
+        [Test]
+        public async Task PostAsync_Null_ReturnsBadRequest()
+        {
+            var result = await _itemsController.PostAsync(null);
+            var response = await result.ExecuteAsync(CancellationToken.None);
+
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+        }
+
+        [Test]
+        public async Task PostAsync_InvalidItemWithDefaultValues_ReturnsBadRequest()
+        {
+            var postedItem = new Item();
 
             var result = await _itemsController.PostAsync(postedItem);
             var response = await result.ExecuteAsync(CancellationToken.None);

@@ -18,6 +18,11 @@ namespace ItemList.Api.Controllers
 
         private void ValidateItem(Item item, ModelStateDictionary modelState)
         {
+            if (item == null)
+            {
+                modelState.AddModelError(nameof(item), "Item is not correct.");
+                return;
+            }
             if (item.Id != Guid.Empty)
             {
                 modelState.AddModelError(nameof(item.Id), "Id of item will be overwritten so should be empty.");
@@ -30,7 +35,7 @@ namespace ItemList.Api.Controllers
             {
                 modelState.AddModelError(nameof(item.Value), "Value should not be empty.");
             }
-            if (item.Value.Length > 200)
+            if (item.Value != null && item.Value.Length > 200)
             {
                 modelState.AddModelError(nameof(item.Value), "Value cannot exceed 200 characters.");
             }
@@ -53,7 +58,12 @@ namespace ItemList.Api.Controllers
             {
                 return NotFound();
             }
-            return Ok(await _repository.GetAsync(id));
+            var result = await _repository.GetAsync(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
         }
 
 
