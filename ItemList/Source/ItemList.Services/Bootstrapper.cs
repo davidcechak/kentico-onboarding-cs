@@ -9,9 +9,10 @@ namespace ItemList.Services
     {
         public void RegisterTypes(IDependencyInjectionContainer container)
         {
-            container.RegisterRequestScoped<IIdentifierService, IdentifierService>();
-            container.RegisterRequestScoped<IItemStoringService, ItemStoringService>();
-            container.RegisterRequestScoped<ITimeService, TimeService>();
+            container
+                .RegisterRequestScoped<IIdentifierService, IdentifierService>()
+                .RegisterRequestScoped<IItemStoringService, ItemStoringService>()
+                .RegisterRequestScoped<ITimeService, TimeService>();
         }
     }
 }

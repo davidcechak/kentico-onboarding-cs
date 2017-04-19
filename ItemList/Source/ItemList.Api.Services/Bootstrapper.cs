@@ -10,9 +10,10 @@ namespace ItemList.Api.Services
     {
         public void RegisterTypes(IDependencyInjectionContainer container)
         {
-            container.RegisterRequestScoped<IItemUrlHelper, ItemUrlHelper>();
-            container.RegisterRequestScoped(() => (HttpRequestMessage)HttpContext.Current.Items["MS_HttpRequestMessage"]);
-            container.RegisterRequestScoped<IDatabaseConfiguration, DatabaseConfiguration>();
+            container
+                .RegisterRequestScoped<IItemUrlHelper, ItemUrlHelper>()
+                .RegisterRequestScoped(() => (HttpRequestMessage)HttpContext.Current.Items["MS_HttpRequestMessage"])
+                .RegisterRequestScoped<IDatabaseConfiguration, DatabaseConfiguration>();
         }
     }
 }

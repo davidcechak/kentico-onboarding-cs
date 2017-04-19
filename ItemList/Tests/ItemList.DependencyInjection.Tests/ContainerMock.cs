@@ -15,19 +15,23 @@ namespace ItemList.DependencyInjection.Tests
             _registeredContracts = registeredContracts;
         }
 
-        public void RegisterRequestScoped<TType, TImplementation>()
+        public IDependencyInjectionContainer RegisterRequestScoped<TType, TImplementation>()
             where TImplementation : TType 
             => AddTypeFullName<TType>();
 
-        public void RegisterRequestScoped<TType>(Func<TType> implementationFactory)
+        public IDependencyInjectionContainer RegisterRequestScoped<TType>(Func<TType> implementationFactory)
             => AddTypeFullName<TType>();
 
-        public void RegisterSingleton<TType, TImplementation>() 
+        public IDependencyInjectionContainer RegisterSingleton<TType, TImplementation>() 
             where TImplementation : TType
             => AddTypeFullName<TType>();
         
-        public void RegisterSingleton<TType>(Func<TType> implementationFactory) => AddTypeFullName<TType>();
+        public IDependencyInjectionContainer RegisterSingleton<TType>(Func<TType> implementationFactory) => AddTypeFullName<TType>();
 
-        private void AddTypeFullName<TType>() => _registeredContracts.Add(typeof(TType).FullName);
+        private IDependencyInjectionContainer AddTypeFullName<TType>()
+        {
+            _registeredContracts.Add(typeof(TType).FullName);
+            return this;
+        }
     }
 }

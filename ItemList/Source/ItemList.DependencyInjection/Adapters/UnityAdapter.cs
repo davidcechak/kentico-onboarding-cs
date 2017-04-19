@@ -12,26 +12,31 @@ namespace ItemList.DependencyInjection.Adapters
         {
             _container = container;
         }
-        public void RegisterRequestScoped<TInterface, TImplementation>()
+        public IDependencyInjectionContainer RegisterRequestScoped<TInterface, TImplementation>()
+            where TImplementation : TInterface 
+            => RegisterInterfaceImplementation<TInterface, TImplementation>(new HierarchicalLifetimeManager());
+
+        public IDependencyInjectionContainer RegisterRequestScoped<TType>(Func<TType> implementationFactory) 
+            => RegisterType<TType>(new HierarchicalLifetimeManager(), new InjectionFactory(_ => implementationFactory()));
+
+        public IDependencyInjectionContainer RegisterSingleton<TInterface, TImplementation>() 
+            where TImplementation : TInterface 
+            => RegisterInterfaceImplementation<TInterface, TImplementation>(new ContainerControlledLifetimeManager());
+
+        public IDependencyInjectionContainer RegisterSingleton<TType>(Func<TType> implementationFactory) 
+            => RegisterType<TType>(new ContainerControlledLifetimeManager(), new InjectionFactory(_ => implementationFactory()));
+
+        private IDependencyInjectionContainer RegisterInterfaceImplementation<TInterface, TImplementation>(LifetimeManager lifetimeManager) 
             where TImplementation : TInterface
         {
-            _container.RegisterType<TInterface, TImplementation>(new HierarchicalLifetimeManager());
+            _container.RegisterType<TInterface, TImplementation>(lifetimeManager);
+            return this;
         }
 
-        public void RegisterRequestScoped<TType>(Func<TType> implementationFactory)
+        private IDependencyInjectionContainer RegisterType<TType>(LifetimeManager lifetimeManager, InjectionFactory injectionFactory)
         {
-            _container.RegisterType<TType>(new HierarchicalLifetimeManager(), new InjectionFactory(_ => implementationFactory()));
-        }
-
-        public void RegisterSingleton<TInterface, TImplementation>() 
-            where TImplementation : TInterface
-        {
-            _container.RegisterType<TInterface, TImplementation>(new ContainerControlledLifetimeManager());
-        }
-
-        public void RegisterSingleton<TType>(Func<TType> implementationFactory)
-        {
-            _container.RegisterType<TType>(new ContainerControlledLifetimeManager(), new InjectionFactory(_ => implementationFactory()));
+            _container.RegisterType<TType>(lifetimeManager, injectionFactory);
+            return this;
         }
     }
 }
