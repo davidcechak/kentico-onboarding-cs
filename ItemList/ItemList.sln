@@ -25,7 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.Services.Tests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts.Tests.Base", "Tests\Contracts.Tests.Base\Contracts.Tests.Base.csproj", "{B016245C-CC90-45D5-9343-74A4B3B28731}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.DependencyInjection.Tests", "ItemList.DependencyInjection.Tests\ItemList.DependencyInjection.Tests.csproj", "{D93A9F9A-F6A1-4E8B-8EF6-53CA07EB871F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemList.DependencyInjection.Tests", "Tests\ItemList.DependencyInjection.Tests\ItemList.DependencyInjection.Tests.csproj", "{D93A9F9A-F6A1-4E8B-8EF6-53CA07EB871F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
