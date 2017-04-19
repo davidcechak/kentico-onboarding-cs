@@ -20,17 +20,18 @@ namespace ItemList.DependencyInjection.Adapters
 
         public void RegisterRequestScoped<TType>(Func<TType> implementationFactory)
         {
-            _container.RegisterType<TType>(new InjectionFactory(_ => implementationFactory()));
+            _container.RegisterType<TType>(new HierarchicalLifetimeManager(), new InjectionFactory(_ => implementationFactory()));
         }
 
-        public void RegisterSingleton<TInterface, TImplementation>() where TImplementation : TInterface
+        public void RegisterSingleton<TInterface, TImplementation>() 
+            where TImplementation : TInterface
         {
             _container.RegisterType<TInterface, TImplementation>(new ContainerControlledLifetimeManager());
         }
 
         public void RegisterSingleton<TType>(Func<TType> implementationFactory)
         {
-            _container.RegisterInstance(new InjectionFactory(_ => implementationFactory()));
+            _container.RegisterType<TType>(new ContainerControlledLifetimeManager(), new InjectionFactory(_ => implementationFactory()));
         }
     }
 }
