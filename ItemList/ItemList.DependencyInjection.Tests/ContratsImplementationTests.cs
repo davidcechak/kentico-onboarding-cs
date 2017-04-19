@@ -20,24 +20,7 @@ namespace ItemList.DependencyInjection.Tests
         public void SetUp()
         {
             _containerMock = new ContainerMock(new HashSet<string>());
-            _resolverMock = Substitute.For<IResolverBuilder>();
-            _resolverMock
-                .RegisterDependencies(Arg.Any<Action<IDependencyInjectionContainer>>())
-                .Returns(info =>
-                {
-                    info.Arg<Action<IDependencyInjectionContainer>>().Invoke(_containerMock);
-                    return _resolverMock;
-                });
-            _resolverMock
-                .RegisterDependencies(Arg.Any<IEnumerable<Action<IDependencyInjectionContainer>>>())
-                .Returns(info =>
-                {
-                    foreach (var typeRegistrationMethod in info.Arg<IEnumerable<Action<IDependencyInjectionContainer>>>())
-                    {
-                        typeRegistrationMethod.Invoke(_containerMock);
-                    }
-                    return _resolverMock;
-                });
+            SetUpResolverMock();
         }
 
         [Test]
@@ -68,6 +51,28 @@ namespace ItemList.DependencyInjection.Tests
                 $"This should not be registered: [ {string.Join(firstSeparator, actualRegisteredContracts.Except(expectedRegisteredContracts))} ],\n\n" +
                 $"This is not registered: [ {string.Join(secondSeparator, expectedRegisteredContracts.Except(actualRegisteredContracts))} ],\n"
                 );
+        }
+
+        private void SetUpResolverMock()
+        {
+            _resolverMock = Substitute.For<IResolverBuilder>();
+            _resolverMock
+                .RegisterDependencies(Arg.Any<Action<IDependencyInjectionContainer>>())
+                .Returns(info =>
+                {
+                    info.Arg<Action<IDependencyInjectionContainer>>().Invoke(_containerMock);
+                    return _resolverMock;
+                });
+            _resolverMock
+                .RegisterDependencies(Arg.Any<IEnumerable<Action<IDependencyInjectionContainer>>>())
+                .Returns(info =>
+                {
+                    foreach (var typeRegistrationMethod in info.Arg<IEnumerable<Action<IDependencyInjectionContainer>>>())
+                    {
+                        typeRegistrationMethod.Invoke(_containerMock);
+                    }
+                    return _resolverMock;
+                });
         }
     }
 }
