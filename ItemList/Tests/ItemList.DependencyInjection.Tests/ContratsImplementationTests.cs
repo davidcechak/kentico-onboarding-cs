@@ -24,7 +24,7 @@ namespace ItemList.DependencyInjection.Tests
         }
 
         [Test]
-        public void AllContractsHaveRegisteredImplementation()
+        public void Bootstrap_KnownBootstrapper_RegistersAllContracts()
         {
             var bootstrap = new Bootstrap(BootstrapFactory.Bootstrappers.Value, _resolverMock);
             var expectedContracts = GetExpectedContracts();
