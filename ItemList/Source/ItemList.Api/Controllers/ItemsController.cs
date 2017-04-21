@@ -87,7 +87,7 @@ namespace ItemList.Api.Controllers
             {
                 modelState.AddModelError(nameof(item.Value), "Value should not be empty.");
             }
-            if (item.Value != null && item.Value.Length > 200)
+            else if (item.Value.Length > 200)
             {
                 modelState.AddModelError(nameof(item.Value), "Value cannot exceed 200 characters.");
             }
