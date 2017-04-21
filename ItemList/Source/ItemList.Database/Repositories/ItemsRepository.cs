@@ -15,9 +15,9 @@ namespace ItemList.Database.Repositories
 
         public ItemsRepository(IDatabaseConfiguration databaseConfiguration)
         {
-            var databaseName = MongoUrl.Create(databaseConfiguration.DefaultConnectionString).DatabaseName;
-            var client = new MongoClient(databaseConfiguration.DefaultConnectionString);
-            var database = client.GetDatabase(databaseName);
+            var mongoUrl = MongoUrl.Create(databaseConfiguration.DefaultConnectionString);
+            var client = new MongoClient(mongoUrl);
+            var database = client.GetDatabase(mongoUrl.DatabaseName);
             _collection = database.GetCollection<Item>(CollectionName);
         }
         public async Task<IEnumerable<Item>> GetAllAsync() 
