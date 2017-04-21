@@ -17,14 +17,14 @@ namespace ItemList.DependencyInjection.Adapters
             => RegisterInterfaceImplementation<TInterface, TImplementation>(new HierarchicalLifetimeManager());
 
         public IDependencyInjectionContainer RegisterRequestScoped<TType>(Func<TType> implementationFactory) 
-            => RegisterType<TType>(new HierarchicalLifetimeManager(), new InjectionFactory(_ => implementationFactory()));
+            => RegisterType<TType>(new HierarchicalLifetimeManager(), GetNewInjectionFactory(implementationFactory));
 
         public IDependencyInjectionContainer RegisterSingleton<TInterface, TImplementation>() 
             where TImplementation : TInterface 
             => RegisterInterfaceImplementation<TInterface, TImplementation>(new ContainerControlledLifetimeManager());
 
         public IDependencyInjectionContainer RegisterSingleton<TType>(Func<TType> implementationFactory) 
-            => RegisterType<TType>(new ContainerControlledLifetimeManager(), new InjectionFactory(_ => implementationFactory()));
+            => RegisterType<TType>(new ContainerControlledLifetimeManager(), GetNewInjectionFactory(implementationFactory));
 
         private IDependencyInjectionContainer RegisterInterfaceImplementation<TInterface, TImplementation>(LifetimeManager lifetimeManager) 
             where TImplementation : TInterface
@@ -37,6 +37,11 @@ namespace ItemList.DependencyInjection.Adapters
         {
             _container.RegisterType<TType>(lifetimeManager, injectionFactory);
             return this;
+        }
+
+        private static InjectionFactory GetNewInjectionFactory<TType>(Func<TType> implementationFactory)
+        {
+            return new InjectionFactory(_ => implementationFactory());
         }
     }
 }
