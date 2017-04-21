@@ -8,12 +8,9 @@ namespace ItemList.Api.Services
 {
     public class Bootstrapper : IBootstrapper
     {
-        public void RegisterTypes(IDependencyInjectionContainer container)
-        {
-            container
-                .RegisterRequestScoped<IItemUrlHelper, ItemUrlHelper>()
-                .RegisterRequestScoped(() => (HttpRequestMessage)HttpContext.Current.Items["MS_HttpRequestMessage"])
-                .RegisterRequestScoped<IDatabaseConfiguration, DatabaseConfiguration>();
-        }
+        public void RegisterTypes(IDependencyInjectionContainer container) => container
+            .RegisterRequestScoped<IItemUrlHelper, ItemUrlHelper>()
+            .RegisterRequestScoped(() => (HttpRequestMessage)HttpContext.Current.Items["MS_HttpRequestMessage"])
+            .RegisterRequestScoped<IDatabaseConfiguration, DatabaseConfiguration>();
     }
 }
