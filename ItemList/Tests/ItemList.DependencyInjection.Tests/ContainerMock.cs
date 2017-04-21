@@ -8,7 +8,8 @@ namespace ItemList.DependencyInjection.Tests
     {
         private readonly ICollection<string> _registeredContracts;
 
-        public IEnumerable<string> RegisteredContracts => _registeredContracts;
+        public IEnumerable<string> RegisteredContracts 
+            => _registeredContracts;
 
         public ContainerMock(ICollection<string> registeredContracts)
         {
@@ -26,7 +27,8 @@ namespace ItemList.DependencyInjection.Tests
             where TImplementation : TType
             => AddTypeFullName<TType>();
         
-        public IDependencyInjectionContainer RegisterSingleton<TType>(Func<TType> implementationFactory) => AddTypeFullName<TType>();
+        public IDependencyInjectionContainer RegisterSingleton<TType>(Func<TType> implementationFactory) 
+            => AddTypeFullName<TType>();
 
         private IDependencyInjectionContainer AddTypeFullName<TType>()
         {
