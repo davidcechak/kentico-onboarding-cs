@@ -77,7 +77,7 @@ namespace ItemList.Api.Controllers
             }
             if (item.Id != Guid.Empty)
             {
-                modelState.AddModelError(nameof(item.Id), "Id of item will be overwritten so should be empty.");
+                modelState.AddModelError(nameof(item.Id), "Item id should be empty as it will be overwritten.");
             }
             if (string.IsNullOrEmpty(item.Ueid))
             {
@@ -89,7 +89,7 @@ namespace ItemList.Api.Controllers
             }
             else if (item.Value.Length > 200)
             {
-                modelState.AddModelError(nameof(item.Value), "Value cannot exceed 200 characters.");
+                modelState.AddModelError(nameof(item.Value), "Value should not exceed 200 characters.");
             }
         }
     }
