@@ -8,7 +8,8 @@ namespace ItemList.DependencyInjection
 {
     public static class BootstrapFactory
     {
-        private static readonly Lazy<IEnumerable<IBootstrapper>> Bootstrappers = new Lazy<IEnumerable<IBootstrapper>>(() =>
+        // Internal for test purpose
+        internal static readonly Lazy<IEnumerable<IBootstrapper>> Bootstrappers = new Lazy<IEnumerable<IBootstrapper>>(() =>
             BootstrappersBuilder
             .Create()
             .Include<Database.Bootstrapper>()
@@ -17,6 +18,9 @@ namespace ItemList.DependencyInjection
             .AsEnumerable());
 
         public static IBootstrap Create(HttpConfiguration config) 
-            => new UnityWebBootstrap(config, Bootstrappers.Value);
+            => new Bootstrap(Bootstrappers.Value, CreateResolverBuilder(config));
+
+        private static IResolverBuilderInitializer CreateResolverBuilder(HttpConfiguration config) 
+            => UnityWebResolverBuilder.Create(config);
     }
 }

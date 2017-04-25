@@ -2,6 +2,7 @@
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.ModelBinding;
 using ItemList.Contracts.Api;
 using ItemList.Contracts.Database;
 using ItemList.Contracts.Models;
@@ -25,13 +26,27 @@ namespace ItemList.Api.Controllers
         public async Task<IHttpActionResult> GetAsync() 
             => Ok(await _repository.GetAllAsync());
 
-
         public async Task<IHttpActionResult> GetAsync(Guid id)
-            => Ok(await _repository.GetAsync(id));
-
+        {
+            if (id == Guid.Empty)
+            {
+                return NotFound();
+            }
+            var result = await _repository.GetAsync(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
 
         public async Task<IHttpActionResult> PostAsync(Item item)
         {
+            ValidateItem(item, ModelState);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var newItem = await _itemStoringService.StoreNewItemAsync(item);
 
             var location = _itemUrlHelper.GetUrl(newItem.Id);
@@ -39,18 +54,43 @@ namespace ItemList.Api.Controllers
             return Created(location, newItem);
         }
 
-
+        // dummy implementation
         public async Task<IHttpActionResult> DeleteAsync(Guid id)
         {
             await _repository.DeleteAsync(id);
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-
+        // dummy implementation
         public async Task<IHttpActionResult> PutAsync(Item item)
         {
             await _repository.UpdateAsync(item);
             return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        private void ValidateItem(Item item, ModelStateDictionary modelState)
+        {
+            if (item == null)
+            {
+                modelState.AddModelError(nameof(item), "Item is not correct.");
+                return;
+            }
+            if (item.Id != Guid.Empty)
+            {
+                modelState.AddModelError(nameof(item.Id), "Item id should be empty as it will be overwritten.");
+            }
+            if (string.IsNullOrEmpty(item.Ueid))
+            {
+                modelState.AddModelError(nameof(item.Ueid), "Ueid should not be empty.");
+            }
+            if (string.IsNullOrEmpty(item.Value))
+            {
+                modelState.AddModelError(nameof(item.Value), "Value should not be empty.");
+            }
+            else if (item.Value.Length > 200)
+            {
+                modelState.AddModelError(nameof(item.Value), "Value should not exceed 200 characters.");
+            }
         }
     }
 }

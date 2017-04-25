@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FAF28019-56CC-4232-9B28-A964B2C5BF49}</ProjectGuid>
+    <ProjectGuid>{D93A9F9A-F6A1-4E8B-8EF6-53CA07EB871F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ItemList.Services.Tests</RootNamespace>
-    <AssemblyName>ItemList.Services.Tests</AssemblyName>
+    <RootNamespace>ItemList.DependencyInjection.Tests</RootNamespace>
+    <AssemblyName>ItemList.DependencyInjection.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -44,6 +44,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -51,31 +52,28 @@
         <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
       </ItemGroup>
     </When>
-    <Otherwise />
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+      </ItemGroup>
+    </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="IdentifierServiceTests.cs" />
-    <Compile Include="ItemStoringServiceTests.cs" />
+    <Compile Include="ContainerMock.cs" />
+    <Compile Include="ContratsImplementationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TimeServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Source\ItemList.Contracts\ItemList.Contracts.csproj">
-      <Project>{8BD82302-C4B5-4CCE-AC2D-7845C743AADC}</Project>
+      <Project>{8bd82302-c4b5-4cce-ac2d-7845c743aadc}</Project>
       <Name>ItemList.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\ItemList.Services\ItemList.Services.csproj">
-      <Project>{139629F4-0D1B-4C0F-980D-720F98133EEC}</Project>
-      <Name>ItemList.Services</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Contracts.Tests.Base\Contracts.Tests.Base.csproj">
-      <Project>{b016245c-cc90-45d5-9343-74a4b3b28731}</Project>
-      <Name>Contracts.Tests.Base</Name>
+    <ProjectReference Include="..\..\Source\ItemList.DependencyInjection\ItemList.DependencyInjection.csproj">
+      <Project>{557b0a30-4dea-4b82-9ef8-8dd1f19b6ae6}</Project>
+      <Name>ItemList.DependencyInjection</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

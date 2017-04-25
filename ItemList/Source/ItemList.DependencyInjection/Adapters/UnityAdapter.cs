@@ -1,5 +1,4 @@
 using System;
-using ItemList.Contracts.Api;
 using ItemList.Contracts.DependencyInjection;
 using Microsoft.Practices.Unity;
 
@@ -13,15 +12,36 @@ namespace ItemList.DependencyInjection.Adapters
         {
             _container = container;
         }
-        public void RegisterRequestScoped<TInterface, TImplementation>()
+        public IDependencyInjectionContainer RegisterRequestScoped<TInterface, TImplementation>()
+            where TImplementation : TInterface 
+            => RegisterInterfaceImplementation<TInterface, TImplementation>(new HierarchicalLifetimeManager());
+
+        public IDependencyInjectionContainer RegisterRequestScoped<TType>(Func<TType> implementationFactory) 
+            => RegisterType<TType>(new HierarchicalLifetimeManager(), GetNewInjectionFactory(implementationFactory));
+
+        public IDependencyInjectionContainer RegisterSingleton<TInterface, TImplementation>() 
+            where TImplementation : TInterface 
+            => RegisterInterfaceImplementation<TInterface, TImplementation>(new ContainerControlledLifetimeManager());
+
+        public IDependencyInjectionContainer RegisterSingleton<TType>(Func<TType> implementationFactory) 
+            => RegisterType<TType>(new ContainerControlledLifetimeManager(), GetNewInjectionFactory(implementationFactory));
+
+        private IDependencyInjectionContainer RegisterInterfaceImplementation<TInterface, TImplementation>(LifetimeManager lifetimeManager) 
             where TImplementation : TInterface
         {
-            _container.RegisterType<TInterface, TImplementation>(new HierarchicalLifetimeManager());
+            _container.RegisterType<TInterface, TImplementation>(lifetimeManager);
+            return this;
         }
 
-        public void RegisterRequestScoped<TType>(Func<TType> implementationFactory)
+        private IDependencyInjectionContainer RegisterType<TType>(LifetimeManager lifetimeManager, InjectionFactory injectionFactory)
         {
-            _container.RegisterType<TType>(new InjectionFactory(_ => implementationFactory()));
+            _container.RegisterType<TType>(lifetimeManager, injectionFactory);
+            return this;
+        }
+
+        private static InjectionFactory GetNewInjectionFactory<TType>(Func<TType> implementationFactory)
+        {
+            return new InjectionFactory(_ => implementationFactory());
         }
     }
 }

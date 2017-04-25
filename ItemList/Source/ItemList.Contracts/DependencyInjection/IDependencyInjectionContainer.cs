@@ -4,9 +4,14 @@ namespace ItemList.Contracts.DependencyInjection
 {
     public interface IDependencyInjectionContainer
     {
-        void RegisterRequestScoped<TType, TImplementation>() 
+        IDependencyInjectionContainer RegisterRequestScoped<TType, TImplementation>() 
             where TImplementation : TType;
 
-        void RegisterRequestScoped<TType>(Func<TType> implementationFactory);
+        IDependencyInjectionContainer RegisterRequestScoped<TType>(Func<TType> implementationFactory);
+
+        IDependencyInjectionContainer RegisterSingleton<TType, TImplementation>()
+            where TImplementation : TType;
+
+        IDependencyInjectionContainer RegisterSingleton<TType>(Func<TType> implementationFactory);
     }
 }

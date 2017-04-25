@@ -1,17 +1,14 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: InternalsVisibleTo("ItemList.DependencyInjection.Tests")]
-[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ItemList.IoCBootstraper")]
+[assembly: AssemblyTitle("ItemList.DependencyInjection.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Kentico software")]
-[assembly: AssemblyProduct("ItemList.IoCBootstraper")]
+[assembly: AssemblyProduct("ItemList.DependencyInjection.Tests")]
 [assembly: AssemblyCopyright("Copyright © Kentico software 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -22,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("557b0a30-4dea-4b82-9ef8-8dd1f19b6ae6")]
+[assembly: Guid("d93a9f9a-f6a1-4e8b-8ef6-53ca07eb871f")]
 
 // Version information for an assembly consists of the following four values:
 //
